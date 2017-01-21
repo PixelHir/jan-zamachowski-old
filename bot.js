@@ -1,5 +1,4 @@
-// Simple echo bot. He'll repeat anything that you say.
-// Will stop when you say '/stop'
+
 var login = require("facebook-chat-api");
 var fs = require('fs');
 //Bot regexps
