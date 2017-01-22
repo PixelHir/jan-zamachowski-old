@@ -59,7 +59,16 @@ callback(err) {
 api.sendMessage(msg, event.threadID);
 } else if(event.body === '/help') {
 		api.sendMessage("help jest dla ciot", event.threadID);
+} else if(event.body === '/dailyhenicz') {
+            
+var maximum = 4;
+var minimum = 1;
+var randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+var msg = { body: "tylko nie fap za duo", attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '1.png')
 }
+api.sendMessage(msg, event.threadID);
+}
+
             api.markAsRead(event.threadID, function(err) {
               if(err) console.log(err);
             });
