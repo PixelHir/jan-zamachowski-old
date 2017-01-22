@@ -57,6 +57,8 @@ callback(err) {
             var msg = { body: "Witaj-Zyjesz jako wiezien w zboczonym programie komputerowym Ego.Za kopula nieba jest wolnosc,>|><<~|€€}?|*?>~>?$~~|%|~\}^|\€?'j", attachment: fs.createReadStream('./ego/1.png')
 }
 api.sendMessage(msg, event.threadID);
+} else if(event.body === '/help') {
+		api.sendMessage("help jest dla ciot", event.threadID);
 }
             api.markAsRead(event.threadID, function(err) {
               if(err) console.log(err);
