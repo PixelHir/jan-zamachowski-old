@@ -59,7 +59,21 @@ callback(err) {
 api.sendMessage(msg, event.threadID);
 } else if(event.body === '/help') {
 		api.sendMessage("help jest dla ciot", event.threadID);
+} else if(event.body === '/dailyhenicz') {
+            
+var maximum = 4;
+var minimum = 1;
+var randomnumber = Math.floor(Math.random() * 4) + 1  
+var msg = { body: "tylko nie fap za duzo", attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '.jpg')
+} 
+	
+api.sendMessage(msg, event.threadID);
+} else if(event.body === '/inba') {
+	var randomnumber = Math.floor(Math.random() * 5) + 1
+	var msg = { body: "Inba trwa", attachment: fs.createReadStream('./inba/' + randomnumber + '.png')}
+	api.sendMessage(msg, event.threadID);
 }
+
             api.markAsRead(event.threadID, function(err) {
               if(err) console.log(err);
             });
