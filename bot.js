@@ -64,7 +64,7 @@ api.sendMessage(msg, event.threadID);
 var maximum = 4;
 var minimum = 1;
 var randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-var msg = { body: "tylko nie fap za duo", attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '1.png')
+var msg = { body: "tylko nie fap za duo", attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '1.jpg')
 }
 api.sendMessage(msg, event.threadID);
 }
