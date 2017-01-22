@@ -10,7 +10,7 @@ login({email: process.env.FB_USERNAME, password: process.env.FB_PASSWORD}, funct
     if(err) return console.error(err);
 
     api.setOptions({listenEvents: true});
-
+	api.sendMessage("Bot został zrestartowany pomyślnie.", "100001862348398");
     var stopListening = api.listen(function(err, event) {
         if(err) return console.error(err);
 
