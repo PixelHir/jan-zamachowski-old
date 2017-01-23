@@ -70,7 +70,7 @@ var msg = { body: "tylko nie fap za duzo", attachment: fs.createReadStream('./da
 api.sendMessage(msg, event.threadID);
 } else if(event.body === '/inba') {
 	var randomnumber = Math.floor(Math.random() * 5) + 1
-	var msg = { body: "Inba trwa", attachment: fs.createReadStream('./inba/' + randomnumber + '.jpg')}
+	var msg = { body: "Inba trwa", attachment: fs.createReadStream('./inba/' + randomnumber + '.png')}
 	api.sendMessage(msg, event.threadID);
 }
 
