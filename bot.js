@@ -124,6 +124,9 @@ login( {
                 }
 
                 //zPyro
+                
+                event.body = event.body.toLowerCase();
+                
                 else if(event.body === "/zpyro")
                 {
                     //GITLAB CONNECTION
