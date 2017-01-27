@@ -63,7 +63,7 @@ api.sendMessage(msg, event.threadID);
             
 var maximum = 4;
 var minimum = 1;
-var randomnumber = Math.floor(Math.random() * 4) + 1  
+var randomnumber = Math.floor(Math.random() * 4) + 1
 var msg = { body: "tylko nie fap za duzo", attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '.jpg')
 } 
 	
@@ -73,6 +73,12 @@ api.sendMessage(msg, event.threadID);
 	var msg = { body: "Inba trwa", attachment: fs.createReadStream('./inba/' + randomnumber + '.png')}
 	api.sendMessage(msg, event.threadID);
 }
+                
+            //zPyro
+            else if(event.body === '/zpyro') {
+                var msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg')}
+                api.sendMessage(msg, event.threadID);
+            }
 
             api.markAsRead(event.threadID, function(err) {
               if(err) console.log(err);
