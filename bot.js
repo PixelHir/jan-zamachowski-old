@@ -130,7 +130,7 @@ login( {
                     //GITLAB - ALL COLLABORATORS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "-----" + "\n" + "Collabolators:" + "\n" + "> Adam Pisula" + "\n" + "> Michał Prusak" + "\n" + "> Jędrzej Gortel",
+                        body: "zPyro" + "\n" + "----------" + "\n" + "Collabolators:" + "\n" + "> Adam Pisula" + "\n" + "> Michał Prusak" + "\n" + "> Jędrzej Gortel",
                         attachment: fs.createReadStream('./zpyro/flame.jpg')
                     };
 
@@ -149,6 +149,17 @@ login( {
                     api.sendMessage(msg, event.threadID);
                 }
                 else if(event.body === "/zpyro commit --last")
+                {
+                    //GITLAB CONNECTION
+                    //GITLAB - ALL COMMITS
+                    
+                    var msg = {
+                        body: "zPyro" + "\n" + "Last commit: " + "#ID"
+                    };
+
+                    api.sendMessage(msg, event.threadID);
+                }
+                else if(event.body === "/zpyro commit --chart")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
