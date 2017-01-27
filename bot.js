@@ -74,14 +74,14 @@ api.sendMessage(msg, event.threadID);
 	api.sendMessage(msg, event.threadID);
 }
             
-            var command = event.body.split(' ');    
+            //var command = event.body.split(' ');    
                 
             //zPyro
-            else if(command[0] == "/zpyro" || command[0] == "/zPyro") {
-                var msg;
+            else if(event.body == "/zpyro") {
+                //var msg;
                 
-                if(command.length == 1)
-                    msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg')};
+                //if(command.length == 1)
+                    var msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg') };
                 /*else
                 {
                     switch(command[1])
