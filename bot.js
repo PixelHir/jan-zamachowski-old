@@ -124,7 +124,7 @@ login( {
                 }
 
                 //zPyro
-                event.body = event.body.toLowerCase();
+                //event.body = event.body.toLowerCase();
                 
                 else if(event.body === "/zpyro")
                 {
