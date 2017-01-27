@@ -74,26 +74,26 @@ api.sendMessage(msg, event.threadID);
 	api.sendMessage(msg, event.threadID);
 }
             
-            //var command = event.body.split(' ');    
+            var command = event.body.split(' ');    
                 
             //zPyro
-            else if(event.body == "/zpyro") {
+            else if(command[0] == "/zpyro") {
                 //var msg;
                 
-                //if(command.length == 1)
+                if(command.length == 1)
                     var msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg') };
-                /*else
+                else
                 {
                     switch(command[1])
                     {
                         case 'commit':
                             if(command[2] == "--last")
                             {
-                                msg = { body: "Last commit: " };
+                                var msg = { body: "Last commit: " };
                             }
                             break;
                     }
-                }*/
+                }
                 
                 api.sendMessage(msg, event.threadID);
             }
