@@ -83,7 +83,7 @@ api.sendMessage(msg, event.threadID);
             }
             else if(event.body === "/zpyro commit --last")
             {
-                var msg = { body: "zPyro" + "\n" + "Last commit: " + "#ID", attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg') };
+                var msg = { body: "zPyro" + "\n" + "Last commit: " + "#ID", attachment: fs.createReadStream('./zpyro/' + "flame_square" + '.jpg') };
                 
                 api.sendMessage(msg, event.threadID);
             }
