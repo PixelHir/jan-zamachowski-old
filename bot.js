@@ -87,7 +87,7 @@ api.sendMessage(msg, event.threadID);
                     switch(command[1])
                     {
                         case 'commit':
-                            if(command[3] == "--last")
+                            if(command[2] == "--last")
                             {
                                 msg = { body: "Last commit: " };
                             }
