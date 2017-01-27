@@ -73,27 +73,17 @@ api.sendMessage(msg, event.threadID);
 	var msg = { body: "Inba trwa", attachment: fs.createReadStream('./inba/' + randomnumber + '.png')}
 	api.sendMessage(msg, event.threadID);
 }
-            
-            var command = event.body.split(' ');    
                 
             //zPyro
-            else if(command[0] == "/zpyro") {
-                //var msg;
+            else if(event.body === "/zpyro")
+            {
+                var msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg') };
                 
-                if(command.length == 1)
-                    var msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg') };
-                else
-                {
-                    switch(command[1])
-                    {
-                        case 'commit':
-                            if(command[2] == "--last")
-                            {
-                                var msg = { body: "Last commit: " };
-                            }
-                            break;
-                    }
-                }
+                api.sendMessage(msg, event.threadID);
+            }
+            else if(event.body === "/zpyro commit --last")
+            {
+                var msg = { body: "zPyro" + "\n" + "Last commit: " + "#ID", attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg') };
                 
                 api.sendMessage(msg, event.threadID);
             }
