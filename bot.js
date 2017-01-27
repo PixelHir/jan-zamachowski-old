@@ -123,10 +123,29 @@ login( {
                     api.sendMessage(msg, event.threadID);
                 }
 
-                //zPyro
-                //event.body = event.body.toLowerCase();
+                //Lenny
+                var lenny = [
+                    "( ͡° ͜ʖ ͡°)", "¯\_(ツ)_/¯", "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
+                ];
                 
-                else if(event.body === "/zpyro")
+                else if(event.body === "/lenny")
+                {
+                    var text = "";
+                    
+                    for(var i = 0; i < lenny.length; i++)
+                        text += i + ": " + lenny[i] + "\n";
+                    
+                    var msg = {
+                        body: text
+                    };
+                    
+                    api.sendMessage(msg, event.threadID);
+                }
+                
+                //zPyro
+                command = event.body.toLowerCase();
+                
+                else if(command === "/zpyro")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COLLABORATORS
@@ -139,7 +158,7 @@ login( {
                     api.sendMessage(msg, event.threadID);
                 }
                 //zPyro - Commit
-                else if(event.body === "/zpyro commit" || event.body === "/zpyro commit --list")
+                else if(command === "/zpyro commit" || command === "/zpyro commit --list")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
@@ -150,18 +169,18 @@ login( {
 
                     api.sendMessage(msg, event.threadID);
                 }
-                else if(event.body === "/zpyro commit --last")
+                else if(command === "/zpyro commit --last")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "#ID - Author - Title - Date"
+                        body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "\n" + "#ID - Author - Title - Date"
                     };
 
                     api.sendMessage(msg, event.threadID);
                 }
-                else if(event.body === "/zpyro commit --chart")
+                else if(command === "/zpyro commit --chart")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
