@@ -124,7 +124,6 @@ login( {
                 }
 
                 //zPyro
-                
                 event.body = event.body.toLowerCase();
                 
                 else if(event.body === "/zpyro")
@@ -133,7 +132,7 @@ login( {
                     //GITLAB - ALL COLLABORATORS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "----------" + "\n" + "Collabolators:" + "\n" + "> Adam Pisula" + "\n" + "> Michał Prusak" + "\n" + "> Jędrzej Gortel",
+                        body: "zPyro" + "\n" + "---------" + "\n" + "Collabolators:" + "\n" + "> Adam Pisula" + "\n" + "> Michał Prusak" + "\n" + "> Jędrzej Gortel",
                         attachment: fs.createReadStream('./zpyro/flame.jpg')
                     };
 
@@ -146,7 +145,7 @@ login( {
                     //GITLAB - ALL COMMITS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "-----" + "\n" + "Commit list: " + "\n" + "> #ID - Author - Title - Date" + "\n" + "> #ID - Author - Title - Date" + "\n" + "> #ID - Author - Title - Date"
+                        body: "zPyro" + "\n" + "---------" + "\n" + "Commit list: " + "\n" + "> #ID - Author - Title - Date" + "\n" + "> #ID - Author - Title - Date" + "\n" + "> #ID - Author - Title - Date"
                     };
 
                     api.sendMessage(msg, event.threadID);
@@ -157,7 +156,7 @@ login( {
                     //GITLAB - ALL COMMITS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "Last commit: " + "#ID"
+                        body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "#ID - Author - Title - Date"
                     };
 
                     api.sendMessage(msg, event.threadID);
@@ -168,7 +167,7 @@ login( {
                     //GITLAB - ALL COMMITS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "Last commit: " + "#ID"
+                        body: "zPyro" + "\n" + "---------" + "\n" + "Chart: "
                     };
 
                     api.sendMessage(msg, event.threadID);
