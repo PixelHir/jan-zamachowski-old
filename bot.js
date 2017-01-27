@@ -143,9 +143,7 @@ login( {
                 }
                 
                 //zPyro
-                command = event.body.toLowerCase();
-                
-                else if(command === "/zpyro")
+                else if(event.body === "/zpyro")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COLLABORATORS
@@ -158,7 +156,7 @@ login( {
                     api.sendMessage(msg, event.threadID);
                 }
                 //zPyro - Commit
-                else if(command === "/zpyro commit" || command === "/zpyro commit --list")
+                else if(event.body === "/zpyro commit" || event.body === "/zpyro commit --list")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
@@ -169,18 +167,18 @@ login( {
 
                     api.sendMessage(msg, event.threadID);
                 }
-                else if(command === "/zpyro commit --last")
+                else if(event.body === "/zpyro commit --last")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
                     
                     var msg = {
-                        body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "\n" + "#ID - Author - Title - Date"
+                        body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "#ID - Author - Title - Date"
                     };
 
                     api.sendMessage(msg, event.threadID);
                 }
-                else if(command === "/zpyro commit --chart")
+                else if(event.body === "/zpyro commit --chart")
                 {
                     //GITLAB CONNECTION
                     //GITLAB - ALL COMMITS
