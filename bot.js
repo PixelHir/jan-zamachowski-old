@@ -82,7 +82,7 @@ api.sendMessage(msg, event.threadID);
                 
                 if(command.length == 1)
                     msg = { body: "zPyro" + "\n" + event.threadID, attachment: fs.createReadStream('./zpyro/' + "flame" + '.jpg')};
-                else
+                /*else
                 {
                     switch(command[1])
                     {
@@ -93,7 +93,7 @@ api.sendMessage(msg, event.threadID);
                             }
                             break;
                     }
-                }
+                }*/
                 
                 api.sendMessage(msg, event.threadID);
             }
