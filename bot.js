@@ -200,6 +200,16 @@ login( {
                     api.sendMessage(msg, event.threadID);
                 }
 
+                //MUSI BYC NA KONCU
+                else if(event.body[0] === "/")
+                {
+                    var msg = {
+                        body: "\"" + event.body + "\": Nie odnaleziono podanego polecenia"
+                    };
+                    
+                    api.sendMessage(msg, event.threadID);
+                }
+                
                 api.markAsRead(event.threadID, function(err) {
                     if(err)
                         console.log(err);
