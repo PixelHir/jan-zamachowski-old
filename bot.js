@@ -140,13 +140,13 @@ login( {
                     
                     api.sendMessage(msg, event.threadID);
                 }
-                else if(event.body.slice(0, 7) == "/donger" && event.body.slice(8, event.body.length - 8) != "")
+                else if(event.body.split(' ')[0] === "/donger" && event.body.split(' ')[1] != "")
                 {
                     var lenny = [
                         "( ͡° ͜ʖ ͡°)", '¯\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
                     ];
                     var msg = {
-                        body: lenny[event.body.slice(7, event.body.length)]
+                        body: lenny[event.body.split(' ')[1]]
                     };
                     
                     api.sendMessage(msg, event.threadID);   
