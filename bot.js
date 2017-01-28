@@ -140,7 +140,7 @@ login( {
                     
                     api.sendMessage(msg, event.threadID);
                 }
-                else if(event.body.slice(0, 7) === "/donger" && event.body.slice(8, event.body.length) != "")
+                /*else if(event.body.slice(0, 7) === "/donger" && event.body.slice(8, event.body.length) != "")
                 {
                     var lenny = [
                         "( ͡° ͜ʖ ͡°)", '¯\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
@@ -150,7 +150,7 @@ login( {
                     };
                     
                     api.sendMessage(msg, event.threadID);   
-                }
+                }*/
                 
                 //zPyro
                 else if(event.body === "/zpyro")
