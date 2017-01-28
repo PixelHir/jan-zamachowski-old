@@ -171,6 +171,10 @@ login( {
                         {
                             if(command[1] === "commit")
                             {
+                                msg = {
+                                    body: "zPyro" + "\n" + "---------"  + "\n" + "Commits: " + "\n" + " > #ID - Author - Title" + "\n" + " > #ID - Author - Title" + "\n" + " > #ID - Author - Title" + "\n" + " > #ID - Author - Title" + "\n" + " > #ID - Author - Title"
+                                };
+                                
                                 if(command[2] === "--chart")
                                 {
                                     msg = {
