@@ -196,7 +196,7 @@ login( {
                     else if(event.body === "/testimg")
                     {
                         var msg = {
-                            body: "Image 'flame_square.jpg':" + "\n" + fs.createReadStream('./zpyro/flame_square.jpg')
+                            body: "Image 'flame_square.jpg':" + "\n" + JSON.stringify(fs.createReadStream('./zpyro/flame_square.jpg'), null, 4)
                         };
 
                         api.sendMessage(msg, event.threadID);
