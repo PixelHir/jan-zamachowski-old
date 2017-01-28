@@ -127,7 +127,7 @@ login( {
                 else if(event.body === "/lenny")
                 {
                     var lenny = [
-                        "( ͡° ͜ʖ ͡°)", "¯\_(ツ)_/¯", "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
+                        "( ͡° ͜ʖ ͡°)", '¯\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
                     ];
                     var text = "";
                     
@@ -139,6 +139,17 @@ login( {
                     };
                     
                     api.sendMessage(msg, event.threadID);
+                }
+                else if(event.body.slice(0, 6) === "/lenny" && event.body.slice(7, event.body.length) != "")
+                {
+                    var lenny = [
+                        "( ͡° ͜ʖ ͡°)", '¯\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
+                    ];
+                    var msg = {
+                        body: lenny[event.body.slice(7, event.body.length)]
+                    };
+                    
+                    api.sendMessage(msg, event.threadID);   
                 }
                 
                 //zPyro
