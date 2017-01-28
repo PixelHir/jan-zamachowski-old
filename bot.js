@@ -206,6 +206,8 @@ login( {
                     var msg = {
                         body: "\"" + event.body + "\": Nie odnaleziono podanego polecenia"
                     };
+                    
+                    api.sendMessage(msg, event.threadID);
                 }
                 
                 api.markAsRead(event.threadID, function(err) {
