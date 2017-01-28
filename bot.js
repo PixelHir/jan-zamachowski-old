@@ -201,6 +201,16 @@ login( {
 
                         api.sendMessage(msg, event.threadID);
                     }
+                    
+                    else if(event.body === "/smile" || event.body === "/:)")
+                    {
+                        var msg = {
+                            body: ":)",
+                            attachment: fs.createReadStream('./img/smile.jpg')
+                        };
+
+                        api.sendMessage(msg, event.threadID);
+                    }
 
                     //MUSI BYC NA KONCU
                     else if(event.body[0] === "/")
