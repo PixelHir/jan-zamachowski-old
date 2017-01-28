@@ -155,53 +155,50 @@ login( {
                     }
 
                     //zPyro
-                    else if(event.body === "/zpyro")
+                    else if(event.body.split(' ')[0] === "/zpyro")
                     {
                         //GITLAB CONNECTION
                         //GITLAB - ALL COLLABORATORS
 
+                        var command = event.body.split(' ');
+                        
                         var msg = {
                             body: "zPyro" + "\n" + "---------" + "\n" + "Collabolators:" + "\n" + "> Adam Pisula" + "\n" + "> Michał Prusak" + "\n" + "> Jędrzej Gortel",
-                            attachment: fs.createReadStream('./zpyro/flame.jpg')
+                            attachment: fs.createReadStream('./zpyro/flame_square.jpg')
                         };
+                        
+                        if(command.length > 1)
+                        {
+                            if(command[1] === "commit")
+                            {
+                                if(command[2] === "--chart")
+                                {
+                                    msg = {
+                                        body: "zPyro" + "\n" + "---------" + "\n" + "Chart: "
+                                    };
+                                }
+                                else if(command[2] === "--last")
+                                {
+                                    msg = {
+                                        body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "\n" + "#ID - Author - Title - Date"
+                                    };
+                                }
+                            }
+                        }
 
                         api.sendMessage(msg, event.threadID);
                     }
-                    //zPyro - Commit
-                    else if(event.body === "/zpyro commit" || event.body === "/zpyro commit --list")
+                    
+                    else if(event.body === "/testimg")
                     {
-                        //GITLAB CONNECTION
-                        //GITLAB - ALL COMMITS
-
                         var msg = {
-                            body: "zPyro" + "\n" + "---------" + "\n" + "Commit list: " + "\n" + "> #ID - Author - Title - Date" + "\n" + "> #ID - Author - Title - Date" + "\n" + "> #ID - Author - Title - Date"
-                        };
-
-                        api.sendMessage(msg, event.threadID);
-                    }
-                    else if(event.body === "/zpyro commit --last")
-                    {
-                        //GITLAB CONNECTION
-                        //GITLAB - ALL COMMITS
-
-                        var msg = {
-                            body: "zPyro" + "\n" + "---------"  + "\n" + "Last commit: " + "#ID - Author - Title - Date"
-                        };
-
-                        api.sendMessage(msg, event.threadID);
-                    }
-                    else if(event.body === "/zpyro commit --chart")
-                    {
-                        //GITLAB CONNECTION
-                        //GITLAB - ALL COMMITS
-
-                        var msg = {
-                            body: "zPyro" + "\n" + "---------" + "\n" + "Chart: "
+                            body: "Image 'flame_square.jpg':" + "\n" + fs.createReadStream('./zpyro/flame_square.jpg')
                         };
 
                         api.sendMessage(msg, event.threadID);
                     }
                     
+                    //Smile
                     else if(event.body === "/smile" || event.body === "/:)")
                     {
                         var msg = {
