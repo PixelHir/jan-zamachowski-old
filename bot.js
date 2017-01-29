@@ -244,7 +244,7 @@ login( {
                         var selswodzywki = swodzywki[Math.floor(Math.random() * swodzywki.length)];
                         connection.query("INSERT INTO `swears` (`USERID`, `COUNT`) VALUES (" + event.senderID +", 1) ON DUPLICATE KEY UPDATE count=count+1;");
                         var query=connection.query("SELECT * FROM `swears` WHERE `USERID` = 110001862348398");
-                        var swearuserc = x
+                        var swearuserc = 0;
                         query.on('result', function(row) {
                             swearuserc = row.COUNT;
                         });
