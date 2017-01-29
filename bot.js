@@ -5,6 +5,7 @@ cmd1 = /^\/color/,
 cmd2 = /^\/echo/,
 cmd3 = /^\/emoji/,
 cmd4 = /^\/search/,
+SPRAWDZAM CZY TRAVIS SIE WYSYPIE
 login( {
     email: process.env.FB_USERNAME,
     password: process.env.FB_PASSWORD
