@@ -1,5 +1,11 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
+});
 //Bot regexps
 cmd1 = /^\/color/,
 cmd2 = /^\/echo/,
@@ -9,6 +15,17 @@ swear1 = /kurwa/i,
 swear2 = /huj/i,
 swear3 = /pierdole/i,
 swear4 = /pierdolę/i,
+
+connection.connect(function(err) {
+    if (err) {
+        console.error('db error: ' + err.stack);
+        return;
+    }
+console.log('connected to db');
+connection.query("USE `janek`;");
+
+
+var ownerid = process.env.FB_OWNERID
 login( {
     email: process.env.FB_USERNAME,
     password: process.env.FB_PASSWORD
@@ -225,6 +242,7 @@ login( {
                     } else if(swear1.test(event.body)||swear2.test(event.body)||swear3.test(event.body)||swear4.test(event.body)) {
                         var swodzywki = ["Nie klnij tyle śmieciu", "Mama wie jak przeklinasz?", "JAKI DAJESZ KURWA PRZYKŁAD ŚMIECIU PIERDOLONY"]
                         var selswodzywki = swodzywki[Math.floor(Math.random() * swodzywki.length)];
+                        connection.query("INSERT INTO `swears` (`USERID`, `COUNT`) VALUES (" + event.senderID +", 1) ON DUPLICATE KEY UPDATE count=count+1;");
                         api.sendMessage(selswodzywki, event.threadID);
                     }
   
@@ -255,4 +273,5 @@ login( {
             break;
         }
     });
+});
 });
