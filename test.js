@@ -8,5 +8,3 @@ login( {
     if(err)
         return console.error(err);
         });
-    });
-});
