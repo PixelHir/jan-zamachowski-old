@@ -7,6 +7,6 @@ login( {
 }, function callback (err, api) {
     if(err)
         return console.error(err);
-        }
+        });
     });
 });
