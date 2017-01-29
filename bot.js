@@ -178,7 +178,7 @@ login( {
                                 if(command[2] === "--chart")
                                 {
                                     msg = {
-                                        body: "zPyro" + "\n" + "---------" + "\n" + "Chart: "
+                                        body: "zPyro" + "\n" + "---------" + "\n" + "Chart: " + "\n" + "Jędrzej: 2137%"
                                     };
                                 }
                                 else if(command[2] === "--last")
