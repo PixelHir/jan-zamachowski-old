@@ -1,4 +1,4 @@
-var login = require("facebook-chat-api");
+21var login = require("facebook-chat-api");
 var fs = require('fs');
 //Bot regexps
 cmd1 = /^\/color/,
@@ -212,6 +212,24 @@ login( {
 
                         api.sendMessage(msg, event.threadID);
                     }
+
+
+
+
+
+
+
+
+
+                    //Licznik przekleństw
+                    swear1 = /kurwa/i,
+                    swear2 = /huj/i,
+                    swear3 = /pierdole/i,
+                    swear4 = /pierdolę/i,
+                    if(swear1.test(event.body)||swear2.test(event.body)||swear3.test(event.body)||swear4.test(event.body)) {
+                        api.sendMessage("Nie klnij tyle śmieciu", event.threadID);
+                    }
+
 
                     //MUSI BYC NA KONCU
                     else if(event.body[0] === "/")
