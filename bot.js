@@ -1,4 +1,4 @@
-21var login = require("facebook-chat-api");
+var login = require("facebook-chat-api");
 var fs = require('fs');
 //Bot regexps
 cmd1 = /^\/color/,
