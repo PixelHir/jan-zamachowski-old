@@ -214,8 +214,7 @@ login( {
                         api.sendMessage(msg, event.threadID);
                     }
                     
-                    else if(event.body === "/testimg")
-                    {
+                    else if(event.body === "/testimg") {
                         var msg = {
                             body: "Image 'flame_square.jpg':" + "\n" + JSON.stringify(fs.createReadStream('./zpyro/flame_square.jpg'), null, 4)
                         };
@@ -224,16 +223,20 @@ login( {
                     }
                     
                     //Smile
-                    else if(event.body === "/smile" || event.body === "/:)")
-                    {
+                    else if(event.body === "/smile" || event.body === "/:)") {
                         var msg = {
                             body: ":)",
                             attachment: fs.createReadStream('./img/smile.jpg')
                         };
 
                         api.sendMessage(msg, event.threadID);
-                    } else if(event.body[0] === "/") //MUSI BYC NA KONCU
-                    {
+                    } else if(event.body[0] === "/") { //MUSI BYC NA KONCU
+                        // OLEWANIE KOMEND DO MADZI
+                        var madzia_commands = ["sendnudes", "nudes", "kill", "sex", "kre", "dailykremowka", "jp2", "mp3", "yt", "myid"];
+                        for (var x = 0; x<madzia_commands.length;x++) {
+                            if (event.body.toLowerCase().indexOf(madzia_commands[x])===1) {return;}
+                        }
+
                         var msg = {
                             body: "\"" + event.body + "\": Nie odnaleziono podanego polecenia"
                         };
