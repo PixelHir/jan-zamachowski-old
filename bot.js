@@ -223,7 +223,9 @@ login( {
 
                         api.sendMessage(msg, event.threadID);
                     } else if(swear1.test(event.body)||swear2.test(event.body)||swear3.test(event.body)||swear4.test(event.body)) {
-                        api.sendMessage("Nie klnij tyle śmieciu", event.threadID);
+                        var swodzywki = ["Nie klnij tyle śmieciu", "Mama wie jak przeklinasz?", "JAKI DAJESZ KURWA PRZYKŁAD ŚMIECIU PIERDOLONY"]
+                        var selswodzywki = swodzywki[Math.floor(Math.random() * swodzywki.length)];
+                        api.sendMessage(selswodzywki, event.threadID);
                     }
   
 
