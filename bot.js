@@ -5,6 +5,10 @@ cmd1 = /^\/color/,
 cmd2 = /^\/echo/,
 cmd3 = /^\/emoji/,
 cmd4 = /^\/search/,
+swear1 = /kurwa/i,
+swear2 = /huj/i,
+swear3 = /pierdole/i,
+swear4 = /pierdolę/i,
 login( {
     email: process.env.FB_USERNAME,
     password: process.env.FB_PASSWORD
@@ -211,17 +215,32 @@ login( {
                         };
 
                         api.sendMessage(msg, event.threadID);
-                    }
-
-                    //MUSI BYC NA KONCU
-                    else if(event.body[0] === "/")
+                    } else if(event.body[0] === "/") //MUSI BYC NA KONCU
                     {
                         var msg = {
                             body: "\"" + event.body + "\": Nie odnaleziono podanego polecenia"
                         };
 
                         api.sendMessage(msg, event.threadID);
-                    }   
+                    } else if(swear1.test(event.body)||swear2.test(event.body)||swear3.test(event.body)||swear4.test(event.body)) {
+                        api.sendMessage("Nie klnij tyle śmieciu", event.threadID);
+                    }
+  
+
+
+
+
+
+
+
+
+
+                    //Licznik przekleństw
+                    
+                    
+
+                    
+                    
                 }
                 
                 api.markAsRead(event.threadID, function(err) {
