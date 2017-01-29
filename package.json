@@ -13,7 +13,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node bot.js",
-    "test": "node bot.js"
+    "test": "node test.js"
   },
   "author": "",
   "license": "ISC"
