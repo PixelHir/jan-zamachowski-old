@@ -245,7 +245,7 @@ login( {
                         connection.query("INSERT INTO `swears` (`USERID`, `COUNT`) VALUES (" + event.senderID +", 1) ON DUPLICATE KEY UPDATE count=count+1;");
                         var query=connection.query("SELECT * FROM `swears` WHERE `USERID` = 110001862348398");
                         query.on('result', function(row) {
-                            swearuserc = row.COUNT;
+                            var swearuserc = row.COUNT;
                         });
                         if (swearuserc) {api.sendMessage(selswodzywki + " To już " + swearuserc + " raz...", event.threadID);}
                         if (!swearuserc) {api.sendMessage(selswodzywki, event.threadID)};
