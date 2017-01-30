@@ -86,21 +86,18 @@ var commands = [
     {
         cmd: "emoji",
         syntax: " EMOJI",
-        desc: "Zmiana koloru czatu",
+        desc: "Zmiana emoji czatu",
         func: (api, event, args) => {
-            if(args.length == 2)
-            {
-                api.changeThreadEmoji(args, event.threadID, function callback(err) {
+            api.changeThreadEmoji(args, event.threadID, function callback(err) {
+                if(err)
+                {
                     api.sendMessage(args + " nie jest prawidłowym emoji!", event.threadID);
                     
-                    if(err)
-                        return console.error(err);
-                });   
-                
-                api.sendMessage("Ustawiłem emoji czatu na " + args, event.threadID);
-            }
-            else
-                api.sendMessage(args + " nie jest prawidłowym emoji!", event.threadID);
+                    return console.error(err);
+                }
+            });   
+            
+            api.sendMessage("Ustawiłem emoji czatu na " + args, event.threadID);
         }
     },
     //ECHO
