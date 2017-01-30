@@ -1,6 +1,8 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
+var commands = require('commands/zpyro.js');
+
 var connection = mysql.createConnection({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
@@ -41,8 +43,33 @@ login({
 
 		switch(event.type) {
 			case "message":
-				if (typeof event.body == "string") {
-					if (event.body === '/stop') {
+				if (typeof(event.body) == "string") {
+                    var input = event.body.toLowerCase();
+                    var split = input.split(' ');
+                    
+                    var useChar = "_";
+                    
+                    if(event.body.indexOf(useChar) == 0)
+                    {
+                        var cmd = split[0].substring(1);
+                        var args = input.slice(split[0].length + 1);
+                        
+                        for(var i = 0; i < commands.length; i++)
+                        {
+                            if(cmd == commands[i].cmd)
+                            {
+                                if(typeof(commands[i].func) == "function")
+                                    commands[i].func(api, event, args);
+                                else
+                                    api.sendMessage(JSON.stringify(commands[i]), event.threadID);
+                            }
+                        }
+                    }
+                    
+                    if(event.body[0] == "/")
+                        api.sendMessage("Trwają prace nad Jankiem. Spróbuj ponownie później!", event.threadID);
+                    
+					/*if (event.body === '/stop') {
 						api.sendMessage("wypierdalaj", event.threadID);
 					} else if (event.body === '/discord') {
 						api.sendMessage("http://nanami.kazigk.com", event.threadID);
@@ -213,7 +240,7 @@ login({
 					}
 
 
-					//Licznik przekleństw
+					//Licznik przekleństw*/
 
 
 				}
