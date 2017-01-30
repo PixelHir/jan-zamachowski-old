@@ -14,15 +14,15 @@ var commands = [
             var arguments = args.split(' ');
             var text = "";
             
-            if(arguments[0] == "--short")
+            if(arguments[0] == "--long")
             {   
                 for(var i = 0; i < commands.length; i++)
-                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + "\n";
+                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
             }
             else
             {
                 for(var i = 0; i < commands.length; i++)
-                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
+                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + "\n";
             }
             
             api.sendMessage(text, event.threadID);
