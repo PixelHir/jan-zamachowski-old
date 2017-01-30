@@ -5,6 +5,7 @@ var useChar = "@";
 //var commands = require('./commands/commands.js');
 
 var commands = [
+    //HELP
     {
         cmd: "help",
         syntax: " --short/long",
@@ -16,31 +17,133 @@ var commands = [
             if(arguments[0] == "--short")
             {   
                 for(var i = 0; i < commands.length; i++)
-                    text += useChar + commands[i].cmd + commands[i].syntax + "\n";
+                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + "\n";
             }
             else
             {
                 for(var i = 0; i < commands.length; i++)
-                    text += useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
+                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
             }
             
             api.sendMessage(text, event.threadID);
         }
     },
+    //ZNAK KOMENDY
+    {
+        cmd: "cmdchar",
+        syntax: " CHARACTER",
+        desc: "Znak komendy; domyślnie @",
+        func: (api, event, args) => {
+            if(args == "")
+                api.sendMessage("Znak komendy to " + useChar, event.threadID);                
+            else if(args.length == 1)
+            {
+                useChar = args;
+                api.sendMessage("Znak komendy ustawiono na " + args, event.threadID);
+            }
+            else
+                api.sendMessage("Znak komendy musi być pojedynczym znakiem alfanumerycznym!", event.threadID);
+        }
+    },
+    //ZPYRO*
     {
         cmd: "zpyro",
         syntax: " [option] --parameter",
         desc: "zPyro",
         func: (api, event, args) => {
+            var arguments = args.split(' ');
+            
             api.sendMessage("Args:" + "\n" + args, event.threadID);
         }
     },
+    //KOLOR CZATU
     {
         cmd: "color",
-        syntax: " RRGGBB",
+        syntax: " RRGGBB/RGB",
         desc: "Zmiana koloru czatu",
         func: (api, event, args) => {
-            api.sendMessage("Args:" + "\n" + args, event.threadID);
+            var color = args;
+            
+            if(args.length == 3)
+            {
+                color = args[0] + args[0] + args[1] + args[1] + args[2] + args[2];   
+            }
+            
+            if(color.length == 6)
+            {
+                api.changeThreadColor(color, event.threadID, function callback(err) {
+                    if (err)
+                    {
+                        api.sendMessage("Wystąpił błąd. Sprawdź, czy kolor jest poprawnie zapisany w formacie RRGGBB lub RGB (szesnastkowo)!", event.threadID);
+
+                        return console.error(err);   
+                    }
+                });    
+            }
+            else
+                api.sendMessage("Wystąpił błąd. Sprawdź, czy kolor jest poprawnie zapisany w formacie RRGGBB lub RGB (szesnastkowo)!", event.threadID);
+        }
+    },
+    //EMOJI
+    {
+        cmd: "emoji",
+        syntax: " EMOJI",
+        desc: "Zmiana emoji czatu",
+        func: (api, event, args) => {
+            api.changeThreadEmoji(args, event.threadID, function callback(err) {
+                if(err)
+                {
+                    api.sendMessage(args + " nie jest prawidłowym emoji!", event.threadID);
+                    
+                    return console.error(err);
+                }
+            });   
+            
+            api.sendMessage("Ustawiłem emoji czatu na " + args, event.threadID);
+        }
+    },
+    //ECHO
+    {
+        cmd: "echo",
+        syntax: " TEXT",
+        desc: "Wyprowadzanie tekstu podanego jako argument",
+        func: (api, event, args) => {
+            var arguments = args.split('|');
+            
+            for(var i = 0; i < arguments.length; i++)
+                api.sendMessage(arguments[i], event.threadID);
+        }
+    },
+    //ID WATKU
+    {
+        cmd: "threadid",
+        syntax: "",
+        desc: "Zwraca ID wątku",
+        func: (api, event, args) => {
+            api.sendMessage("ID konwersacji:" + "\n" + event.threadID, event.threadID);
+        }
+    },
+    //ID USERA
+    {
+        cmd: "senderid",
+        syntax: "",
+        desc: "Zwraca ID użytkownika",
+        func: (api, event, args) => {
+            api.sendMessage("ID użytkownika:" + "\n" + event.senderID, event.threadID);
+        }
+    },
+    //SMILE
+    {
+        cmd: "smile",
+        syntax: "",
+        desc: "Zwraca uśmieszek :)",
+        func: (api, event, args) => {
+            var msg = {
+                body: ":)",
+                attachment: fs.createReadStream('./img/smile.jpg')
+            };
+
+            api.sendMessage(msg, event.threadID);
         }
     }
 ];
@@ -108,9 +211,6 @@ login({
                             }
                         }
                     }
-                    
-                    if(event.body[0] == "/")
-                        api.sendMessage("Trwają prace nad Jankiem. Spróbuj ponownie później!", event.threadID);
                     
 					/*if (event.body === '/stop') {
 						api.sendMessage("wypierdalaj", event.threadID);
