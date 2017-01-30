@@ -47,7 +47,7 @@ login({
                     var input = event.body.toLowerCase();
                     var split = input.split(' ');
                     
-                    var useChar = "_";
+                    var useChar = "@";
                     
                     if(event.body.indexOf(useChar) == 0)
                     {
@@ -56,6 +56,8 @@ login({
                         
                         for(var i = 0; i < commands.length; i++)
                         {
+                            console.log(commands[i] + "|" + cmd);
+                            
                             if(cmd == commands[i].cmd)
                             {
                                 if(typeof(commands[i].func) == "function")
