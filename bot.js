@@ -169,6 +169,19 @@ var commands = [
 
             api.sendMessage(msg, event.threadID);
         }
+    },
+    //BAN
+    {
+        cmd: "ban",
+        syntax: "",
+        desc: "MODEEEEEEE",
+        func: (api, event, args) => {
+            if(event.senderID === '100001862348398') {
+                api.sendMessage("Nie.", event.threadID);
+            } else {
+                api.removeUserFromGroup(event.senderID, event.threadID);
+            }
+        }
     }
 ];
 
