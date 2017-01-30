@@ -35,9 +35,8 @@ var commands = [
         desc: "Znak komendy; domyślnie @",
         func: (api, event, args) => {
             if(args == "")
-                api.sendMessage("Znak komendy to " + useChar, event.threadID);
-                
-            if(args.length == 1)
+                api.sendMessage("Znak komendy to " + useChar, event.threadID);                
+            else if(args.length == 1)
             {
                 useChar = args;
                 api.sendMessage("Znak komendy ustawiono na " + args, event.threadID);
