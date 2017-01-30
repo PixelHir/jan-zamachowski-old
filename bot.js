@@ -182,6 +182,20 @@ var commands = [
                 api.removeUserFromGroup(event.senderID, event.threadID);
             }
         }
+    },
+    {
+        cmd: "dailyhenicz"
+        syntax: "",
+        desc: "You have encountered a rare henicz",
+        func: (api, event, args) => {
+            var randomnumber = Math.floor(Math.random() * 4) + 1;
+            var msg = {
+                body: "tylko nie fap za duzo",
+                attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '.jpg')
+                };
+
+            api.sendMessage(msg, event.threadID);
+        }
     }
 ];
 
