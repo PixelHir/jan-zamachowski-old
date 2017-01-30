@@ -1,9 +1,31 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
+var useChar = "@";
 //var commands = require('./commands/commands.js');
 
 var commands = [
+    {
+        cmd: "help",
+        syntax: " --short/long",
+        desc: "Pomoc",
+        func: (api, event, args) => {
+            var text = "";
+            
+            if(args[0] == "--short")
+            {   
+                for(var i = 0; i < commands.length; i++)
+                    text += useChar + commands[i].cmd + commands[i].syntax + "\n";
+            }
+            else
+            {
+                for(var i = 0; i < commands.length; i++)
+                    text += useChar + commands[i].cmd + commands[i].syntax + " - " + commands[i].desc + "\n";
+            }
+            
+            api.sendMessage(text, event.threadID);
+        }
+    },
     {
         cmd: "zpyro",
         syntax: " [option] --parameter",
@@ -39,10 +61,10 @@ swear4 = /pierdolę/i,
 
 connection.connect(function(err) {
 	if (err) {
-		console.error('db error: ' + err.stack);
+		console.error('DB ERROR: ' + err.stack);
 		return;
 	}
-console.log('connected to db');
+console.log('Connected to DB');
 connection.query("USE `janek`;");
 
 
@@ -66,25 +88,18 @@ login({
                     var input = event.body.toLowerCase();
                     var split = input.split(' ');
                     
-                    console.log(input + "::" + split[0].substring(1));
-                    
-                    var useChar = "@";
-                    
                     if(input[0] == useChar)
                     {
-                        console.log(commands.toString());
                         var cmd = split[0].substring(1);
                         var args = input.slice(split[0].length + 1);
                         
                         for(var i = 0; i < commands.length; i++)
-                        {
-                            console.log(commands[i] + "|" + cmd);
-                            
+                        {   
                             if(cmd == commands[i].cmd)
                             {
                                 if(typeof(commands[i].func) == "function")
                                 {
-                                    console.log("Wykonano: " + cmd);
+                                    console.log("Executed: '" + cmd + "'");
                                     commands[i].func(api, event, args);
                                 }
                                 else
