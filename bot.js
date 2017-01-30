@@ -1,7 +1,26 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
-var commands = require('./commands/commands.js');
+//var commands = require('./commands/commands.js');
+
+var commands = [
+    {
+        cmd: "zpyro",
+        syntax: " [option] --parameter",
+        desc: "zPyro",
+        func: (api, event, args) => {
+            api.sendMessage("Args:" + "\n" + args, event.threadID);
+        }
+    },
+    {
+        cmd: "color",
+        syntax: " RRGGBB",
+        desc: "Zmiana koloru czatu",
+        func: (api, event, args) => {
+            api.sendMessage("Args:" + "\n" + args, event.threadID);
+        }
+    }
+];
 
 var connection = mysql.createConnection({
 	host: process.env.DB_HOST,
