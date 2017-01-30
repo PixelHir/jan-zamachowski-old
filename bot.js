@@ -192,6 +192,9 @@ login({
                     var input = event.body.toLowerCase();
                     var split = input.split(' ');
                     
+                    if(input == "cmdchar")
+                        commands[1].func(api, event, "");
+                    
                     if(input[0] == useChar)
                     {
                         var cmd = split[0].substring(1);
