@@ -173,16 +173,16 @@ var commands = [
     //BAN
     {
         cmd: "ban",
-        syntax: "",
-        desc: "MODEEEEEEE",
+        syntax: " [user_id]",
+        desc: "Banowanie użytkownika",
         func: (api, event, args) => {
-            if(event.senderID === '100001862348398') {
-                api.sendMessage("Nie.", event.threadID);
-            } else {
+            if(args != "")
+                api.removeUserFromGroup(args, event.threadID);
+            else
                 api.removeUserFromGroup(event.senderID, event.threadID);
-            }
         }
     },
+    //DAILYHENICZ
     {
         cmd: "dailyhenicz"
         syntax: "",
@@ -197,6 +197,7 @@ var commands = [
             api.sendMessage(msg, event.threadID);
         }
     },
+    //2137
     {
         cmd: "2137"
         syntax: "",
@@ -207,6 +208,8 @@ var commands = [
                 body: "Inba trwa",
                 attachment: fs.createReadStream('./inba/' + randomnumber + '.png')
             };
+    
+            api.sendMessage(msg, event.threadID);
         }
     }
 ];
