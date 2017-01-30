@@ -53,7 +53,7 @@ login({
                     
                     if(input[0] == useChar)
                     {
-                        console.log("->if usechar");
+                        console.log(commands.toString());
                         var cmd = split[0].substring(1);
                         var args = input.slice(split[0].length + 1);
                         
