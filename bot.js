@@ -59,7 +59,7 @@ var commands = [
             api.sendMessage("Args:" + "\n" + args, event.threadID);
         }
     },
-    //DONGER*
+    //DONGER
     {
         cmd: "donger",
         syntax: " [donger_id]",
@@ -173,18 +173,18 @@ var commands = [
     //BAN
     {
         cmd: "ban",
-        syntax: "",
-        desc: "MODEEEEEEE",
+        syntax: " [user_id]",
+        desc: "Banowanie użytkownika",
         func: (api, event, args) => {
-            if(event.senderID === '100001862348398') {
-                api.sendMessage("Nie.", event.threadID);
-            } else {
+            if(args != "")
+                api.removeUserFromGroup(args, event.threadID);
+            else
                 api.removeUserFromGroup(event.senderID, event.threadID);
-            }
         }
     },
+    //DAILYHENICZ
     {
-        cmd: "dailyhenicz"
+        cmd: "dailyhenicz",
         syntax: "",
         desc: "You have encountered a rare henicz",
         func: (api, event, args) => {
@@ -192,8 +192,23 @@ var commands = [
             var msg = {
                 body: "tylko nie fap za duzo",
                 attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '.jpg')
-                };
+            };
 
+            api.sendMessage(msg, event.threadID);
+        }
+    },
+    //2137
+    {
+        cmd: "2137",
+        syntax: "",
+        desc: "INSERT Kremówka;",
+        func: (api, event, args) => {
+            var randomnumber = Math.floor(Math.random() * 5) + 1;
+            var msg = {
+                body: "Inba trwa",
+                attachment: fs.createReadStream('./inba/' + randomnumber + '.png')
+            };
+    
             api.sendMessage(msg, event.threadID);
         }
     }
