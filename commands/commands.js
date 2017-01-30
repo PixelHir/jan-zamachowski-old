@@ -7,6 +7,14 @@ module.exports = function () {
 			func: (api, event, args) => {
 				api.sendMessage("Args:" + "\n" + args, event.threadID);
 			}
-		}
+		},
+        {
+            cmd: "color",
+			syntax: " RRGGBB",
+			desc: "Zmiana koloru czatu",
+			func: (api, event, args) => {
+				api.sendMessage("Args:" + "\n" + args, event.threadID);
+			}
+        }
 	];
 }
