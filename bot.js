@@ -2,6 +2,9 @@ var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
 var useChar = "@";
+var lenny = [
+    "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
+];
 //var commands = require('./commands/commands.js');
 
 var commands = [
@@ -54,6 +57,27 @@ var commands = [
             var arguments = args.split(' ');
             
             api.sendMessage("Args:" + "\n" + args, event.threadID);
+        }
+    },
+    //DONGER*
+    {
+        cmd: "donger",
+        syntax: " [donger_id]",
+        desc: "Donger",
+        func: (api, event, args) => {
+            var arguments = args.split(' ');
+            
+            if(arguments[0] == "")
+            {
+                var text = "";
+
+                for(var i = 0; i < lenny.length; i++)
+                    text += i + ": " + lenny[i] + "\n";
+                
+                api.sendMessage(text, event.threadID);
+            }
+            else
+                api.sendMessage(lenny[arguments[0]], event.threadID);
         }
     },
     //KOLOR CZATU
