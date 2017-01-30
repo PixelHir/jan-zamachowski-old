@@ -34,6 +34,9 @@ var commands = [
         syntax: " CHARACTER",
         desc: "Znak komendy; domyślnie @",
         func: (api, event, args) => {
+            if(args == "")
+                api.sendMessage("Znak komendy to " + useChar, event.threadID);
+                
             if(args.length == 1)
             {
                 useChar = args;
@@ -209,9 +212,6 @@ login({
                             }
                         }
                     }
-                    
-                    if(event.body[0] == "/")
-                        api.sendMessage("Trwają prace nad Jankiem. Spróbuj ponownie później!", event.threadID);
                     
 					/*if (event.body === '/stop') {
 						api.sendMessage("wypierdalaj", event.threadID);
