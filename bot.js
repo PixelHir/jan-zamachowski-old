@@ -1,7 +1,7 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
-var commands = require('./commands/zpyro.js');
+var commands = require('./commands/commands.js');
 
 var connection = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -59,7 +59,10 @@ login({
                             if(cmd == commands[i].cmd)
                             {
                                 if(typeof(commands[i].func) == "function")
+                                {
+                                    console.log("Wykonano: " + cmd);
                                     commands[i].func(api, event, args);
+                                }
                                 else
                                     api.sendMessage(JSON.stringify(commands[i]), event.threadID);
                             }
