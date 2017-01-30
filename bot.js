@@ -10,11 +10,10 @@ var commands = [
         syntax: " --short/long",
         desc: "Pomoc",
         func: (api, event, args) => {
+            var arguments = args.split(' ');
             var text = "";
             
-            console.log(args[0]);
-            
-            if(args[0] == "--short")
+            if(arguments[0] == "--short")
             {   
                 for(var i = 0; i < commands.length; i++)
                     text += useChar + commands[i].cmd + commands[i].syntax + "\n";
