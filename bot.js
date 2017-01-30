@@ -196,6 +196,18 @@ var commands = [
 
             api.sendMessage(msg, event.threadID);
         }
+    },
+    {
+        cmd: "2137"
+        syntax: "",
+        desc: "INSERT Kremówka;"
+        func: (api, event, args) => {
+            var randomnumber = Math.floor(Math.random() * 5) + 1;
+            var msg = {
+                body: "Inba trwa",
+                attachment: fs.createReadStream('./inba/' + randomnumber + '.png')
+            };
+        }
     }
 ];
 
