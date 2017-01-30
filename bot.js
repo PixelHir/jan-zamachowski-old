@@ -119,7 +119,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca ID wątku",
         func: (api, event, args) => {
-            api.sendMessage(arguments[i], event.threadID);
+            api.sendMessage(event.threadID, event.threadID);
         }
     },
     //ID USERA
@@ -128,7 +128,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca ID użytkownika",
         func: (api, event, args) => {
-            api.sendMessage(arguments[i], event.senderID);
+            api.sendMessage(event.senderID, event.threadID);
         }
     },
     //SMILE
