@@ -47,9 +47,11 @@ login({
                     var input = event.body.toLowerCase();
                     var split = input.split(' ');
                     
+                    console.log(input);
+                    
                     var useChar = "@";
                     
-                    if(event.body.indexOf(useChar) == 0)
+                    if(input[0] == useChar)
                     {
                         var cmd = split[0].substring(1);
                         var args = input.slice(split[0].length + 1);
