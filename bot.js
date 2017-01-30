@@ -12,6 +12,8 @@ var commands = [
         func: (api, event, args) => {
             var text = "";
             
+            console.log(args[0]);
+            
             if(args[0] == "--short")
             {   
                 for(var i = 0; i < commands.length; i++)
@@ -20,7 +22,7 @@ var commands = [
             else
             {
                 for(var i = 0; i < commands.length; i++)
-                    text += useChar + commands[i].cmd + commands[i].syntax + " - " + commands[i].desc + "\n";
+                    text += useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
             }
             
             api.sendMessage(text, event.threadID);
