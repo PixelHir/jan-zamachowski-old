@@ -1,7 +1,7 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
-var commands = require('commands/zpyro.js');
+var commands = require('./commands/zpyro.js');
 
 var connection = mysql.createConnection({
 	host: process.env.DB_HOST,
