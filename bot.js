@@ -88,9 +88,11 @@ var commands = [
         syntax: " EMOJI",
         desc: "Zmiana koloru czatu",
         func: (api, event, args) => {
-            if(args.length == 1)
+            if(args.length == 2)
             {
                 api.changeThreadEmoji(args, event.threadID, function callback(err) {
+                    api.sendMessage(args + " nie jest prawidłowym emoji!", event.threadID);
+                    
                     if(err)
                         return console.error(err);
                 });   
@@ -119,7 +121,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca ID wątku",
         func: (api, event, args) => {
-            api.sendMessage(event.threadID, event.threadID);
+            api.sendMessage("ID konwersacji:" + "\n" + event.threadID, event.threadID);
         }
     },
     //ID USERA
@@ -128,7 +130,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca ID użytkownika",
         func: (api, event, args) => {
-            api.sendMessage(event.senderID, event.threadID);
+            api.sendMessage("ID użytkownika:" + "\n" + event.senderID, event.threadID);
         }
     },
     //SMILE
