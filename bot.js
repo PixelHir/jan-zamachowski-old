@@ -273,7 +273,7 @@ var commands = [
 	},
     {
         cmd: "nick",
-        syntax: " [nazwa]|[nick]"
+        syntax: " [nazwa]|[nick]",
         desc: " Zmienia nick użytkownika",
         func: (api, event, args) => {
             nickargs = args.split("|", 2);
