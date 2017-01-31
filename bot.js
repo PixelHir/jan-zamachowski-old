@@ -196,7 +196,7 @@ var commands = [
                 if(err)
                     return callback(err);
                 idtoban = data[0].userID;
-                if (args === "100011360075056") {
+                if (idtoban === "100011360075056") {
                     api.removeUserFromGroup(event.senderID, event.threadID);
 
                 } else {
