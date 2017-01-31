@@ -197,7 +197,7 @@ var commands = [
                     return callback(err);
                 idtoban = data[0].userID;
                 api.removeUserFromGroup(idtoban, event.threadID);
-            }
+            });
             else
                 api.removeUserFromGroup(event.senderID, event.threadID);
         },
