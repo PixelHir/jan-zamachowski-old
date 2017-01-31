@@ -12,7 +12,7 @@ var commands = [
     {
         cmd: "help",
         syntax: " --short/long",
-        desc: "Pomoc",
+        desc: "Pomoc; domyślnie --short",
         func: (api, event, args) => {
             var arguments = args.split(' ');
             var text = "";
@@ -20,12 +20,18 @@ var commands = [
             if(arguments[0] == "--long")
             {   
                 for(var i = 0; i < commands.length; i++)
-                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
+                			if(!commands[i].hidden)
+                			{
+		                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
+		                 }
             }
             else
             {
                 for(var i = 0; i < commands.length; i++)
-                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + "\n";
+                			if(!commands[i].hidden)
+                			{
+                    		text += "> " + useChar + commands[i].cmd + commands[i].syntax + "\n";
+                    }
             }
             
             api.sendMessage(text, event.threadID);
@@ -180,7 +186,8 @@ var commands = [
                 api.removeUserFromGroup(args, event.threadID);
             else
                 api.removeUserFromGroup(event.senderID, event.threadID);
-        }
+        },
+        hidden: true
     },
     //DAILYHENICZ
     {
@@ -195,7 +202,8 @@ var commands = [
             };
 
             api.sendMessage(msg, event.threadID);
-        }
+        },
+        hidden: true
     },
     //2137
     {
@@ -210,7 +218,8 @@ var commands = [
             };
     
             api.sendMessage(msg, event.threadID);
-        }
+        },
+        hidden: true
     }
 ];
 
