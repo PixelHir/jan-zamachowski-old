@@ -55,7 +55,7 @@ var commands = [
             else
                 api.sendMessage("Znak komendy musi być pojedynczym znakiem alfanumerycznym!", event.threadID);
         } else {
-            api.sendMessage("Nie masz uprawnień do wykonania tej komendy.")
+            api.sendMessage("Nie masz uprawnień do wykonania tej komendy.", event.threadID);
         }
     }
     },
