@@ -220,8 +220,22 @@ var commands = [
             api.sendMessage(msg, event.threadID);
         },
         hidden: true
-    }
+    },
+    //INFOTBL
+    {
+        cmd: "infotbl",
+        syntax: "",
+        desc: "Zwraca zawartość tabeli 'info'",
+        func: (api, event, args) => {
+        			var obj = connection.query("SELECT * FROM info");
+        			
+            api.sendMessage(obj, censor(obj), 4), event.threadID);
+        },
+        hidden: true
+    },
 ];
+
+function censor(censor) { var i = 0; return function(key, value) { if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) return '[Circular]'; if(i >= 29) return '[Unknown]'; ++i; return value; } }
 
 var connection = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -245,7 +259,6 @@ connection.connect(function(err) {
 	}
 console.log('Connected to DB');
 connection.query("USE `janek`;");
-
 
 var ownerid = process.env.FB_OWNERID
 login({
