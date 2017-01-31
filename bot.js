@@ -22,6 +22,7 @@ var commands = [
                 for(var i = 0; i < commands.length; i++)
                 			if(!commands[i].hidden)
                 			{
+                            text = "```" + "\n";
 		                    text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
 		                 }
             }
