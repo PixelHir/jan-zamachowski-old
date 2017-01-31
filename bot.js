@@ -293,9 +293,9 @@ login({
 }, function callback (err, api) {
 	if(err)
 		return console.error(err);
-	if (process.env.TEST_MODE == 1); {
+	if (process.env.BUILD_TEST_CI === "ON"); {
 		console.log("Test zakończony.");
-		process.exit(-1);
+		process.exit(0);
 	}
 	api.setOptions({ listenEvents: true });
 	api.sendMessage("Bot został zrestartowany pomyślnie.", "100001862348398");
