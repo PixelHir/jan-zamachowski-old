@@ -150,7 +150,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca informacje o wątku",
         func: (api, event, args) => {
-            api.sendMessage("Informacje o konwersacji:" + "\n" + JSON.stringify(event.threadInfo, null, 4), event.threadID);
+            api.sendMessage("Informacje o konwersacji:" + "\n" + JSON.stringify(event.getThreadInfo(event.threadID), null, 4), event.threadID);
         }
     },
     //ID WATKU
@@ -259,7 +259,7 @@ var commands = [
             
             //api.sendMessage(text, event.threadID);
     			}
-		}
+	}
 ];
 
 var connection = mysql.createConnection({
@@ -293,9 +293,13 @@ login({
 }, function callback (err, api) {
 	if(err)
 		return console.error(err);
-
+	if (process.env.TEST_MODE == 1); {
+		console.log("Test zakończony.");
+		process.exit(-1);
+	}
 	api.setOptions({ listenEvents: true });
 	api.sendMessage("Bot został zrestartowany pomyślnie.", "100001862348398");
+	api.sendMessage("Bot został zrestartowany pomyślnie.", "100013249186366");
 	var stopListening = api.listen(function(err, event) {
 		if (err)
 			return console.error(err);
