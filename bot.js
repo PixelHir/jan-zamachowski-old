@@ -220,7 +220,27 @@ var commands = [
             api.sendMessage(msg, event.threadID);
         },
         hidden: true
-    }
+    },
+    //CRTINFOTBL
+    {
+        cmd: "crtinfotbl",
+        syntax: "",
+        desc: "Tworzy tabelę informacji",
+        func: (api, event, args) => {
+            api.sendMessage(connection.query("CREATE TABLE info(id text, usechar text)") + " -> próba stworzenia tablicy!", event.threadID);
+        },
+        hidden: true
+    },
+    //INFOTBL
+    {
+        cmd: "infotbl",
+        syntax: "",
+        desc: "Zwraca zawartość tabeli 'info'",
+        func: (api, event, args) => {
+            api.sendMessage(connection.query("CREATE TABLE info(id text, usechar text)") + " -> próba stworzenia tablicy!", event.threadID);
+        },
+        hidden: true
+    },
 ];
 
 var connection = mysql.createConnection({
@@ -245,7 +265,6 @@ connection.connect(function(err) {
 	}
 console.log('Connected to DB');
 connection.query("USE `janek`;");
-
 
 var ownerid = process.env.FB_OWNERID
 login({
