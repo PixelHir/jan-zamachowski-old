@@ -144,6 +144,15 @@ var commands = [
                 api.sendMessage(arguments[i], event.threadID);
         }
     },
+    //INFORMACJE O WATKU
+    {
+        cmd: "threadinfo",
+        syntax: "",
+        desc: "Zwraca informacje o wątku",
+        func: (api, event, args) => {
+            api.sendMessage("Informacje o konwersacji:" + "\n" + event.getThreadInfo(), event.threadID);
+        }
+    },
     //ID WATKU
     {
         cmd: "threadid",
