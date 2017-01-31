@@ -243,12 +243,12 @@ var commands = [
         syntax: "",
         desc: "Zwraca zawartość tabeli 'info'",
         func: (api, event, args) => {
-        			var obj = connection.query("SELECT * FROM info");
+        			//var obj = connection.query("SELECT * FROM info");
         			
-            var cache = []; 
-            var text = JSON.stringify(obj, function(key, value) { if (typeof value === 'object' && value !== null) { if (cache.indexOf(value) !== -1) { return; } cache.push(value); } return value; }); cache = null;
+            //var cache = []; 
+            //var text = JSON.stringify(obj, function(key, value) { if (typeof value === 'object' && value !== null) { if (cache.indexOf(value) !== -1) { return; } cache.push(value); } return value; }); cache = null;
             
-            api.sendMessage(text, event.threadID);
+            //api.sendMessage(text, event.threadID);
     			}
 		}
 ];
