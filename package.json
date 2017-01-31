@@ -15,6 +15,6 @@
     "start": "node bot.js",
     "test": "node bot.js"
   },
-  "author": "",
+  "author": "PixelGGamer, Adampisula, ravkr",
   "license": "ISC"
 }
