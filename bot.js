@@ -293,6 +293,8 @@ login({
 }, function callback (err, api) {
 	if(err)
 		return console.error(err);
+
+    //Cos sie popsulo i zawsze zwraca true?
 	/*if (process.env.BUILD_TEST_CI === "ON"); {
 		console.log("Test zakończony.");
 		process.exit(0);
