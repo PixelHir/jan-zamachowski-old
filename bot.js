@@ -221,23 +221,13 @@ var commands = [
         },
         hidden: true
     },
-    //CRTINFOTBL
-    {
-        cmd: "crtinfotbl",
-        syntax: "",
-        desc: "Tworzy tabelę informacji",
-        func: (api, event, args) => {
-            api.sendMessage(connection.query("CREATE TABLE info(id text, usechar text)") + " -> próba stworzenia tablicy!", event.threadID);
-        },
-        hidden: true
-    },
     //INFOTBL
     {
         cmd: "infotbl",
         syntax: "",
         desc: "Zwraca zawartość tabeli 'info'",
         func: (api, event, args) => {
-            api.sendMessage(connection.query("CREATE TABLE info(id text, usechar text)") + " -> próba stworzenia tablicy!", event.threadID);
+            api.sendMessage(connection.query("SELECT * FROM info"), event.threadID);
         },
         hidden: true
     },
