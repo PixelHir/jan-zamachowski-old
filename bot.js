@@ -228,9 +228,9 @@ var commands = [
         desc: "Wyszukuje ID usera",
         func: (api, event, args) => {
             api.getUserID(args, function(err, data) {
-        	if(err) return callback(err);
+        	if(err)
+        			return callback(err);
 
-        // Send the message to the best match (best by Facebook's criteria)
         	var foundID = data[0].userID;
         	api.sendMessage("Wynik wyszukiwania: " + foundID, event.threadID);
    		 });
@@ -238,26 +238,27 @@ var commands = [
         hidden: false
     },
     //INFOTBL
-    /* {
+    {
         cmd: "infotbl",
         syntax: "",
         desc: "Zwraca zawartość tabeli 'info'",
         func: (api, event, args) => {
         			var obj = connection.query("SELECT * FROM info");
         			
-            api.sendMessage(obj, censor(obj), 4), event.threadID);
-        },
-        hidden: true
-    }, */
+            var cache = []; 
+            var text = JSON.stringify(obj, function(key, value) { if (typeof value === 'object' && value !== null) { if (cache.indexOf(value) !== -1) { return; } cache.push(value); } return value; }); cache = null;
+            
+            api.sendMessage(text, event.threadID);
+    			}
+		}
 ];
-
-function censor(censor) { var i = 0; return function(key, value) { if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) return '[Circular]'; if(i >= 29) return '[Unknown]'; ++i; return value; } }
 
 var connection = mysql.createConnection({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD
 });
+
 //Bot regexps
 cmd1 = /^\/color/,
 cmd2 = /^\/echo/,
