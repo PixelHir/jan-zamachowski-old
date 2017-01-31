@@ -241,7 +241,7 @@ var commands = [
         			return callback(err);
 
         	var foundID = data[0].userID;
-        	api.sendMessage("Wynik wyszukiwania: " + foundID, event.threadID);
+        	api.sendMessage("Wynik wyszukiwania dla " + args + " : " + foundID, event.threadID);
    		 });
         },
         hidden: false
@@ -269,6 +269,7 @@ var connection = mysql.createConnection({
 });
 
 //Bot regexps
+/*
 cmd1 = /^\/color/,
 cmd2 = /^\/echo/,
 cmd3 = /^\/emoji/,
@@ -277,7 +278,7 @@ swear1 = /kurwa/i,
 swear2 = /huj/i,
 swear3 = /pierdole/i,
 swear4 = /pierdolę/i,
-
+*/
 connection.connect(function(err) {
 	if (err) {
 		console.error('DB ERROR: ' + err.stack);
