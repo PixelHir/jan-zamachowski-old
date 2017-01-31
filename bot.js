@@ -192,7 +192,12 @@ var commands = [
         desc: "Banowanie użytkownika",
         func: (api, event, args) => {
             if(args != "")
-                api.removeUserFromGroup(args, event.threadID);
+                api.getUserID(args, function(err, data) {
+                if(err)
+                    return callback(err);
+                idtoban = data[0].userID;
+                api.removeUserFromGroup(idtoban, event.threadID);
+            }
             else
                 api.removeUserFromGroup(event.senderID, event.threadID);
         },
