@@ -150,7 +150,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca informacje o wątku",
         func: (api, event, args) => {
-            api.sendMessage("Informacje o konwersacji:" + "\n" + event.getThreadInfo(), event.threadID);
+            api.sendMessage("Informacje o konwersacji:" + "\n" + JSON.stringify(event.threadInfo, null, 4), event.threadID);
         }
     },
     //ID WATKU
