@@ -6,7 +6,7 @@ var lenny = [
     "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
 ];
 //var commands = require('./commands/commands.js');
-
+var adminlist = ["100001862348398", "100013249186366"];
 var commands = [
     //HELP
     {
@@ -44,6 +44,7 @@ var commands = [
         syntax: " CHARACTER",
         desc: "Znak komendy; domyślnie @",
         func: (api, event, args) => {
+            if(adminlist.indexOf(event.senderID) > -1) {
             if(args == "")
                 api.sendMessage("Znak komendy to " + useChar, event.threadID);                
             else if(args.length == 1)
@@ -53,7 +54,10 @@ var commands = [
             }
             else
                 api.sendMessage("Znak komendy musi być pojedynczym znakiem alfanumerycznym!", event.threadID);
+        } else {
+            api.sendMessage("Nie masz uprawnień do wykonania tej komendy.")
         }
+    }
     },
     //ZPYRO*
     {
