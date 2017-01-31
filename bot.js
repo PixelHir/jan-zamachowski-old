@@ -227,7 +227,7 @@ var commands = [
         syntax: "",
         desc: "Zwraca zawartość tabeli 'info'",
         func: (api, event, args) => {
-            api.sendMessage(connection.query("SELECT * FROM info").toString() + " <- zawartość tabeli info", event.threadID);
+            api.sendMessage(JSON.stringify(connection.query("SELECT * FROM info"), null, 4), event.threadID);
         },
         hidden: true
     },
