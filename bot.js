@@ -222,7 +222,7 @@ var commands = [
         hidden: true
     },
     //INFOTBL
-    {
+    /* {
         cmd: "infotbl",
         syntax: "",
         desc: "Zwraca zawartość tabeli 'info'",
@@ -232,7 +232,7 @@ var commands = [
             api.sendMessage(obj, censor(obj), 4), event.threadID);
         },
         hidden: true
-    },
+    }, */
 ];
 
 function censor(censor) { var i = 0; return function(key, value) { if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) return '[Circular]'; if(i >= 29) return '[Unknown]'; ++i; return value; } }
