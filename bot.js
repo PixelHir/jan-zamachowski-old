@@ -293,7 +293,7 @@ login({
 }, function callback (err, api) {
 	if(err)
 		return console.error(err);
-	if (process.env.TEST_MODE == 1); {
+	if (process.env.TEST_MODE); {
 		console.log("Test zakończony.");
 		process.exit(0);
 	}
