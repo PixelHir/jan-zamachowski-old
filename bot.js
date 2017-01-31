@@ -232,7 +232,7 @@ var commands = [
 
         // Send the message to the best match (best by Facebook's criteria)
         	var foundID = data[0].userID;
-        	api.sendMessage("Wynik wyszukiwania: " + foundID, threadID);
+        	api.sendMessage("Wynik wyszukiwania: " + foundID, event.threadID);
    		 });
         },
         hidden: false
