@@ -7,8 +7,9 @@
   "description": "",
   "main": "bot.js",
   "dependencies": {
+    "cleverbot-node": "^0.2.6",
     "facebook-chat-api": "^1.2.0",
-	"mysql": "2.13.0"
+    "mysql": "2.13.0"
   },
   "devDependencies": {},
   "scripts": {

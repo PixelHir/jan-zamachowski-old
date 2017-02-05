@@ -5,8 +5,11 @@ var useChar = "@";
 var lenny = [
     "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
 ];
+var aithreads = [];
 //var commands = require('./commands/commands.js');
 var adminlist = ["100001862348398", "100013249186366"];
+var Cleverbot = require('cleverbot-node'); 
+cleverbot = new Cleverbot;
 var commands = [
     //HELP
     {
@@ -291,6 +294,24 @@ var commands = [
                 });
             });
         }
+    },
+    {
+        cmd: "ai",
+        syntax: " <on/off>",
+        desc: " Włącza tryb czatbota AI",
+        func: (api, event, args) => {
+            if (args === "on" && aithreads.indexOf(event.threadID) < 0) {
+                aithreads.push(event.threadID);
+                api.sendMessage("Tryb AI włączony", event.threadID)
+            } else if (args === "off" && aithreads.indexOf(event.threadID) > -1) {
+                var aitindex = aithreads.indexOf(event.threadID);
+                if(aitindex > -1) {
+                    aithreads.splice(aitindex, 1);
+                }
+                api.sendMessage("Tryb AI wyłączony", event.threadID);
+
+            }
+    }
     }
 ];
 
@@ -366,8 +387,22 @@ login({
                                     api.sendMessage(JSON.stringify(commands[i]), event.threadID);
                             }
                         }
+                           
+6                        
                     }
-                    
+                    if(aithreads.indexOf(event.threadID) > -1 && input[0] != useChar) {
+                        //api.sendMessage("test", event.threadID);
+                        Cleverbot.prepare(function(){ 
+                        cleverbot.write(event.body, function (response) { 
+                                 api.sendMessage(response.message, event.threadID); 
+                        }); }); 
+
+
+
+
+
+
+                    }
 					/*if (event.body === '/stop') {
 						api.sendMessage("wypierdalaj", event.threadID);
 					} else if (event.body === '/discord') {
