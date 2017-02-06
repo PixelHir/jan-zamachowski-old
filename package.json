@@ -8,8 +8,12 @@
   "main": "bot.js",
   "dependencies": {
     "cleverbot-node": "^0.2.6",
+    "eyes": "^0.1.8",
     "facebook-chat-api": "^1.2.0",
-    "mysql": "2.13.0"
+    "https": "^1.0.0",
+    "mysql": "2.13.0",
+    "util": "^0.10.3",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {},
   "scripts": {
