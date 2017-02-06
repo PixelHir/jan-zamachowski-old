@@ -152,7 +152,7 @@ var commands = [
                 api.sendMessage(arguments[i], event.threadID);
         }
     },
-    //INFORMACJE O WATKU
+    /*INFORMACJE O WATKU - broken
     {
         cmd: "threadinfo",
         syntax: "",
@@ -160,7 +160,7 @@ var commands = [
         func: (api, event, args) => {
             api.sendMessage("Informacje o konwersacji:" + "\n" + JSON.stringify(event.getThreadInfo(event.threadID), null, 4), event.threadID);
         }
-    },
+    }, */
     //ID WATKU
     {
         cmd: "threadid",
