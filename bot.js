@@ -1,6 +1,10 @@
 var login = require("facebook-chat-api");
 var fs = require('fs');
 var mysql = require('mysql');
+var parseString = require('xml2js').parseString;
+var util = require('util');
+var eyes = require('eyes');
+var https = require('https');
 var useChar = "@";
 var lenny = [
     "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
@@ -319,6 +323,32 @@ var commands = [
                 api.sendMessage("Opcja jest już aktywna, lub podałeś zły argument.", event.threadID);
             }
     }
+    },
+    {
+        cmd: "mal",
+        syntax: " <nick>",
+        desc: " Sprawdza MyAnimeList",
+        func: (api, event, args) => {
+            var data = '';
+            https.get('https://myanimelist.net/malappinfo.php?u=' + args + '&status=all&type=anime', function(res) {
+            if (res.statusCode >= 200 && res.statusCode < 400) {
+                res.on('data', function(data_) { data += data_.toString(); });
+                res.on('end', function() {
+                    parseString(data, function(err, result) {
+                        var userinfo = result.myanimelist.myinfo;
+                        console.log(userinfo);
+                        api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n");
+                        api.sendMessage("Obejrzane anime: " + userinfo[0].user_completed + "\n", event.threadID);
+                        api.sendMessage("Oglądane anime: " + userinfo[0].user_watching + "\n", event.threadID);
+                        api.sendMessage("Wstrzymane anime: " + userinfo[0].user_onhold + "\n", event.threadID);
+                        api.sendMessage("Porzucone anime: " + userinfo[0].user_dropped + "\n", event.threadID);
+                        api.sendMessage("Planowane anime:: " + userinfo[0].user_plantowatch + "\n", event.threadID);
+                        api.sendMessage("Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);
+                    });
+                });
+            }
+            });
+        }
     }
 ];
 
