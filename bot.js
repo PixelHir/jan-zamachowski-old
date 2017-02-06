@@ -337,13 +337,7 @@ var commands = [
                     parseString(data, function(err, result) {
                         var userinfo = result.myanimelist.myinfo;
                         console.log(userinfo);
-                        api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n");
-                        api.sendMessage("Obejrzane anime: " + userinfo[0].user_completed + "\n", event.threadID);
-                        api.sendMessage("Oglądane anime: " + userinfo[0].user_watching + "\n", event.threadID);
-                        api.sendMessage("Wstrzymane anime: " + userinfo[0].user_onhold + "\n", event.threadID);
-                        api.sendMessage("Porzucone anime: " + userinfo[0].user_dropped + "\n", event.threadID);
-                        api.sendMessage("Planowane anime:: " + userinfo[0].user_plantowatch + "\n", event.threadID);
-                        api.sendMessage("Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);
+                        api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n" + "Obejrzane anime: " + userinfo[0].user_completed + "\n" + "Oglądane anime: " + userinfo[0].user_watching + "\n" + "Wstrzymane anime: " + userinfo[0].user_onhold + "\n" + "Porzucone anime: " + userinfo[0].user_dropped + "\n" + "Planowane anime:: " + userinfo[0].user_plantowatch + "\n" + "Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);
                     });
                 });
             }
