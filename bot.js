@@ -6,6 +6,7 @@ var lenny = [
     "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
 ];
 var aithreads = [];
+var aiblacklist = ["1149148498474456"];
 //var commands = require('./commands/commands.js');
 var adminlist = ["100001862348398", "100013249186366"];
 var Cleverbot = require('cleverbot-node'); 
@@ -301,8 +302,12 @@ var commands = [
         desc: " Włącza tryb czatbota AI",
         func: (api, event, args) => {
             if (args === "on" && aithreads.indexOf(event.threadID) < 0) {
+                if(aiblacklist.indexOf(event.threadID) < 0) {
                 aithreads.push(event.threadID);
                 api.sendMessage("Tryb AI włączony", event.threadID)
+                } else {
+                    api.sendMessage("Konwersacja znajduje się na czarnej liście",  event.threadID);
+                }  
             } else if (args === "off" && aithreads.indexOf(event.threadID) > -1) {
                 var aitindex = aithreads.indexOf(event.threadID);
                 if(aitindex > -1) {
@@ -310,6 +315,8 @@ var commands = [
                 }
                 api.sendMessage("Tryb AI wyłączony", event.threadID);
 
+            } else {
+                api.sendMessage("Opcja jest już aktywna, lub podałeś zły argument.", event.threadID);
             }
     }
     }
