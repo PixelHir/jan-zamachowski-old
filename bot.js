@@ -329,21 +329,26 @@ var commands = [
         syntax: " <nick>",
         desc: " Sprawdza MyAnimeList",
         func: (api, event, args) => {
-
+            var malargs = args.split(" ");
             var data = '';
-            https.get('https://myanimelist.net/malappinfo.php?u=' + args + '&status=all&type=anime', function(res) {
+            var firstarg = malargs.shift();
+            malargs = malargs.join(" ");
+            if (firstarg === "user") {
+            https.get('https://myanimelist.net/malappinfo.php?u=' + malargs + '&status=all&type=anime', function(res) {
             if (res.statusCode >= 200 && res.statusCode < 400) {
                 res.on('data', function(data_) { data += data_.toString(); });
                 res.on('end', function() {
                     parseString(data, function(err, result) {
                         var userinfo = result.myanimelist.myinfo;
+                        console.log(malargs[1]);
                         if (!userinfo) { api.sendMessage("Niepoprawny nick, lub wystąpił błąd", event.threadID); } else {
                         api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n" + "Obejrzane anime: " + userinfo[0].user_completed + "\n" + "Oglądane anime: " + userinfo[0].user_watching + "\n" + "Wstrzymane anime: " + userinfo[0].user_onhold + "\n" + "Porzucone anime: " + userinfo[0].user_dropped + "\n" + "Planowane anime:: " + userinfo[0].user_plantowatch + "\n" + "Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);}
                     });
                 });
             }
             });
-        }
+        } 
+    }
     }
 ];
 
