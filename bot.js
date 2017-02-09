@@ -347,7 +347,7 @@ var commands = [
                 });
             }
             });
-        } 
+            }
     }
     }
 ];
@@ -384,6 +384,10 @@ login({
 }, function callback (err, api) {
 	if(err)
 		return console.error(err);
+    api.setOptions({
+        listenEvents: true,
+        logLevel: "warn"
+    });
 
     //Cos sie popsulo i zawsze zwraca true?
 	/*if (process.env.BUILD_TEST_CI === "ON"); {
