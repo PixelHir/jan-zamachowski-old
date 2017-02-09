@@ -15,6 +15,9 @@ var aiblacklist = ["1149148498474456"];
 var adminlist = ["100001862348398", "100013249186366"];
 var Cleverbot = require('cleverbot-node'); 
 cleverbot = new Cleverbot;
+var Client = require('node-rest-client').Client;
+var options_auth = { user: process.env.MAL_USERNAME, password: process.env.MAL_PASSWORD };
+var client = new Client(options_auth);
 var commands = [
     //HELP
     {
@@ -347,9 +350,25 @@ var commands = [
                 });
             }
             });
-            }
+            } else if (firstarg === "search") {
+                api.sendMessage("Wyszukuję anime o tytule: " + malargs);
+                client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
+                // parsed response body as js object
+                //console.log(data.anime.entry);
+
+                var queryanimes = [];
+                data.anime.entry.forEach(function (elem) {
+                    queryanimes.push(elem);
+                });
+                api.sendMessage("Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id, event.threadID);
+                // raw response
+                //console.log(response);
+                
+            });
+
+        }
     }
-    }
+},
 ];
 
 var connection = mysql.createConnection({
