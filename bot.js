@@ -625,7 +625,7 @@ login({
 				});
 			break;
 			case "event":
-				console.log(event);
+				console.log(event.logMessageType);
 			break;
 		}
 	});
