@@ -351,7 +351,12 @@ var commands = [
             }
             });
             } else if (firstarg === "search") {
+                process.on('uncaughtException', function (err) {
+                    console.log('Caught exception: ' + err);
+                });
+
                 api.sendMessage("Wyszukuję anime o tytule: " + malargs);
+                try {
                 client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
                 // parsed response body as js object
                 //console.log(data.anime.entry);
@@ -364,7 +369,11 @@ var commands = [
                 // raw response
                 //console.log(response);
                 
-            });
+            }); 
+            } catch (e) {
+                return console.log(e);
+                return api.sendMessage("Nie znaleziono wyników.", event.threadID);
+            }
 
         }
     }
