@@ -353,6 +353,7 @@ var commands = [
             } else if (firstarg === "search") {
                 process.on('uncaughtException', function (err) {
                     console.log('Caught exception: ' + err);
+                    api.sendMessage("Nie znaleziono wyników.", event.threadID);
                 });
 
                 api.sendMessage("Wyszukuję anime o tytule: " + malargs);
