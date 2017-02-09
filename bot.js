@@ -385,8 +385,7 @@ login({
 	if(err)
 		return console.error(err);
     api.setOptions({
-        listenEvents: true,
-        logLevel: "warn"
+        listenEvents: true
     });
 
     //Cos sie popsulo i zawsze zwraca true?
