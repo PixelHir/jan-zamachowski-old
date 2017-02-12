@@ -405,7 +405,6 @@ swear1 = /kurwa/i,
 swear2 = /huj/i,
 swear3 = /pierdole/i,
 swear4 = /pierdolę/i,
-*/
 connection.connect(function(err) {
 	if (err) {
 		console.error('DB ERROR: ' + err.stack);
@@ -413,7 +412,7 @@ connection.connect(function(err) {
 	}
 console.log('Connected to DB');
 connection.query("USE `janek`;");
-
+*/
 var ownerid = process.env.FB_OWNERID
 login({
 	email: process.env.FB_USERNAME,
@@ -667,4 +666,4 @@ login({
 		}
 	});
 });
-});
+
