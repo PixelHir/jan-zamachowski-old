@@ -19,6 +19,7 @@ var Client = require('node-rest-client').Client;
 var options_auth = { user: process.env.MAL_USERNAME, password: process.env.MAL_PASSWORD };
 var client = new Client(options_auth);
 var request = require('request');
+cleverbot.configure({botapi: process.env.CLEVERBOT_API});
 var commands = [
     //HELP
     {
