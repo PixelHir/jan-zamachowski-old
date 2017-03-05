@@ -350,7 +350,7 @@ var commands = [
 
                 api.sendMessage("Wyszukuję anime o tytule: " + malargs);
                 try {
-                client.get("http://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
+                client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
                 // parsed response body as js object
                 console.log(data.toString());
 
