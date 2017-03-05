@@ -406,6 +406,7 @@ login({
         return console.error(err);
     api.setOptions({
         listenEvents: true
+        logLevel: "silent"
     });
     api.setOptions({ listenEvents: true });
     api.sendMessage("Bot został zrestartowany pomyślnie.", "100001862348398");
