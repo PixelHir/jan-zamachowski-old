@@ -442,8 +442,8 @@ login({
                             }
                         }
                     }
+                    //Cleverbot
                     if (aithreads.indexOf(event.threadID) > -1 && input[0] != useChar) {
-                        //api.sendMessage("test", event.threadID);
                         Cleverbot.prepare(() => {
                             cleverbot.write(event.body, (response) => {
                                 api.sendMessage(response.message, event.threadID);
