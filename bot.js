@@ -415,12 +415,6 @@ login({
     api.setOptions({
         listenEvents: true
     });
-
-    //Cos sie popsulo i zawsze zwraca true?
-    /*if (process.env.BUILD_TEST_CI === "ON"); {
-        console.log("Test zakończony.");
-        process.exit(0);
-    }*/
     api.setOptions({ listenEvents: true });
     api.sendMessage("Bot został zrestartowany pomyślnie.", "100001862348398");
     api.sendMessage("Bot został zrestartowany pomyślnie.", "100013249186366");
