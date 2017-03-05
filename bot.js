@@ -354,7 +354,7 @@ var commands = [
                 // parsed response body as js object
                 console.log(data);
 
-                var queryanimes = [];
+                /*var queryanimes = [];
                 data.anime.entry.forEach(function (elem) {
                     queryanimes.push(elem);
                 });
@@ -363,7 +363,7 @@ var commands = [
                     body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id,
                     attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
                 }
-
+                */
 
 
                 //api.sendMessage("Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id, event.threadID);
