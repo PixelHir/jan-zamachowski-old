@@ -322,7 +322,7 @@ var commands = [
     },
     {
         cmd: "mal",
-        syntax: " <nick>",
+        syntax: "<user/search> <args>",
         desc: " Sprawdza MyAnimeList",
         func: (api, event, args) => {
             var malargs = args.split(" ");
@@ -381,22 +381,14 @@ var commands = [
 },
 ];
 
+/*
 var connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD
 });
 
-//Bot regexps
-/*
-cmd1 = /^\/color/,
-cmd2 = /^\/echo/,
-cmd3 = /^\/emoji/,
-cmd4 = /^\/search/,
-swear1 = /kurwa/i,
-swear2 = /huj/i,
-swear3 = /pierdole/i,
-swear4 = /pierdolę/i,
+
 connection.connect(function(err) {
     if (err) {
         console.error('DB ERROR: ' + err.stack);
