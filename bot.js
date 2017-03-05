@@ -405,7 +405,7 @@ login({
     if (err)
         return console.error(err);
     api.setOptions({
-        listenEvents: true
+        listenEvents: true,
         logLevel: "silent"
     });
     api.setOptions({ listenEvents: true });
