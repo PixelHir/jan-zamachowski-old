@@ -352,7 +352,7 @@ var commands = [
                 try {
                 client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
                 // parsed response body as js object
-                console.log(data);
+                console.log(data.toString());
 
                 var queryanimes = [];
                 data.anime.entry.forEach(function (elem) {
