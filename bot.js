@@ -360,8 +360,8 @@ var commands = [
                 });
 
                 var msg = {
-                    body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id,
-                    attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
+                    body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id //pamietaj o przecinku cwelu ~ja
+                    //attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
                 }
                 
 
