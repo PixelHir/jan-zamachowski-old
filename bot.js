@@ -69,6 +69,7 @@ var commands = [
         }
     },
     //ZPYRO*
+    /*
     {
         cmd: "zpyro",
         syntax: " [option] --parameter",
@@ -78,7 +79,7 @@ var commands = [
 
             api.sendMessage("Args:" + "\n" + args, event.threadID);
         }
-    },
+    },*/
     //DONGER
     {
         cmd: "donger",
