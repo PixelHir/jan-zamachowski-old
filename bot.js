@@ -223,7 +223,7 @@ var commands = [
     },
     //DAILYHENICZ
     {
-        cmd: "dailyhenicz",
+        cmd: "dailychenicz",
         syntax: "",
         desc: "You have encountered a rare henicz",
         func: (api, event, args) => {
