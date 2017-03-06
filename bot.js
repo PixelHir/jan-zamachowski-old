@@ -248,7 +248,7 @@ var commands = [
                 body: "Inba trwa",
                 attachment: fs.createReadStream(imagesroot + '/inba/' + randomnumber + '.png')
             };
-
+            console.log(imagesroot + '/inba');
             api.sendMessage(msg, event.threadID);
         },
         hidden: true
