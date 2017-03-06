@@ -20,7 +20,8 @@ var options_auth = { user: process.env.MAL_USERNAME, password: process.env.MAL_P
 var client = new Client(options_auth);
 const request = require('request');
 cleverbot.configure({botapi: process.env.CLEVERBOT_API});
-
+var banned = [""]
+var imagesroot = process.env.IMG_ROOT; // BEZ SLASHA NA KONCU!
 var commands = [
     //HELP
     {
@@ -229,7 +230,7 @@ var commands = [
             var randomnumber = Math.floor(Math.random() * 4) + 1;
             var msg = {
                 body: "tylko nie fap za duzo",
-                attachment: fs.createReadStream('./dailyhenicz/' + randomnumber + '.jpg')
+                attachment: fs.createReadStream(imagesroot +'/dailyhenicz/' + randomnumber + '.jpg')
             };
 
             api.sendMessage(msg, event.threadID);
@@ -245,7 +246,7 @@ var commands = [
             var randomnumber = Math.floor(Math.random() * 5) + 1;
             var msg = {
                 body: "Inba trwa",
-                attachment: fs.createReadStream('./inba/' + randomnumber + '.png')
+                attachment: fs.createReadStream(imagesroot + '/inba/' + randomnumber + '.png')
             };
 
             api.sendMessage(msg, event.threadID);
