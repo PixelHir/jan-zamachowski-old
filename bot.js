@@ -389,6 +389,7 @@ var commands = [
 
             api.getThreadHistory(event.threadID, args[0], args[1], Date.now(), (err, hist) => {
                 api.sendMessage(hist, event.threadID);
+                console.log(hist);
                 console.log(err);
             });
         }
