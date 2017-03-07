@@ -380,7 +380,18 @@ var commands = [
 
         }
     }
-},
+    },
+    {
+        cmd: "history",
+        syntax: "<start> <end>",
+        desc: "Sprawdza historie czatu",
+        func: (api, event, args) => {
+
+            api.getThreadHistory(event.threadID, args[0], args[1], Date.now(), (err, hist) => {
+                api.sendMessage(hist, event.threadID);
+            });
+        }
+    }
 ];
 
 /*
@@ -453,7 +464,9 @@ login({
                                 console.log(response);
                             });
                         });
-                    }           
+                    }
+                    //kc
+
                 }
 
                 api.markAsRead(event.threadID, function(err) {
