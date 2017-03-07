@@ -387,7 +387,7 @@ var commands = [
         desc: "Sprawdza historie czatu",
         func: (api, event, args) => {
 
-            api.getThreadHistory(event.threadID, args[0], args[1], (err, hist) => {
+            api.getThreadHistory(event.threadID, args[0], args[1], 0, (err, hist) => {
                 api.sendMessage(hist, event.threadID);
                 console.log(hist);
                 console.log(err);
