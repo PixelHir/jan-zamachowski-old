@@ -393,6 +393,22 @@ var commands = [
                 console.log(err);
             });
         }
+    },
+    {
+        cmd: "yt",
+        desc: "Wyszukuje film na youtube"
+        syntax: " <tekst>"
+        func: (api, event, args) => {
+            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + args[0] + "&safeSearch=none&key=" + process.env.YT_KEY;
+            request(url, (error, response, body)=> {
+                if (!error && response.statusCode === 200) {
+                const ytresponse = JSON.parse(body)
+                console.log("Got a response: ", ytresponse)
+            } else {
+                console.log("Got an error: ", error, ", status code: ", response.statusCode)
+                }
+            })
+        }
     }
 ];
 
