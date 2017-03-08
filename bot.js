@@ -403,7 +403,7 @@ var commands = [
             request(url, (error, response, body)=> {
                 if (!error && response.statusCode === 200) {
                 const ytresponse = JSON.parse(body)
-                console.log("Got a response: ", ytresponse.items[0].id.videoId);
+                api.sendMessage("http://youtu.be/" + ytresponse.items[0].id.videoId, event.threadID);
             } else {
                 console.log("Got an error: ", error, ", status code: ", response.statusCode)
                 }
