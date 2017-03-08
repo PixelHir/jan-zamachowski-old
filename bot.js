@@ -396,8 +396,8 @@ var commands = [
     },
     {
         cmd: "yt",
-        desc: "Wyszukuje film na youtube"
-        syntax: " <tekst>"
+        desc: "Wyszukuje film na youtube",
+        syntax: " <tekst>",
         func: (api, event, args) => {
             url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + args[0] + "&safeSearch=none&key=" + process.env.YT_KEY;
             request(url, (error, response, body)=> {
@@ -407,7 +407,7 @@ var commands = [
             } else {
                 console.log("Got an error: ", error, ", status code: ", response.statusCode)
                 }
-            })
+            });
         }
     }
 ];
