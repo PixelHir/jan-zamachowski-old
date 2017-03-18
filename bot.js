@@ -19,11 +19,11 @@ const Client = require('node-rest-client').Client;
 var options_auth = { user: process.env.MAL_USERNAME, password: process.env.MAL_PASSWORD };
 var client = new Client(options_auth);
 const request = require('request');
-cleverbot.configure({botapi: process.env.CLEVERBOT_API});
+cleverbot.configure({ botapi: process.env.CLEVERBOT_API });
 var banned = [""]
 var imagesroot = process.env.IMG_ROOT; // BEZ SLASHA NA KONCU!
 var commands = [
-    //HELP
+
     {
         cmd: "help",
         syntax: " --short/long",
@@ -33,14 +33,14 @@ var commands = [
             var text = "";
 
             if (arguments[0] == "--long") {
-                for(var i = 0; i < commands.length; i++) {
+                for (var i = 0; i < commands.length; i++) {
                     if (!commands[i].hidden) {
                         text = "```" + "\n";
                         text += "> " + useChar + commands[i].cmd + commands[i].syntax + " : " + commands[i].desc + "\n";
                     }
                 }
             } else {
-                for(var i = 0; i < commands.length; i++) {
+                for (var i = 0; i < commands.length; i++) {
                     if (!commands[i].hidden) {
                         text += "> " + useChar + commands[i].cmd + commands[i].syntax + "\n";
                     }
@@ -48,9 +48,7 @@ var commands = [
             }
             api.sendMessage(text, event.threadID);
         }
-    },
-    //ZNAK KOMENDY
-    {
+    }, {
         cmd: "cmdchar",
         syntax: " CHARACTER",
         desc: "Znak komendy; domyślnie @",
@@ -68,42 +66,24 @@ var commands = [
                 api.sendMessage("Nie masz uprawnień do wykonania tej komendy.", event.threadID);
             }
         }
-    },
-    //ZPYRO*
-    /*
-    {
-        cmd: "zpyro",
-        syntax: " [option] --parameter",
-        desc: "zPyro",
-        func: (api, event, args) => {
-            var arguments = args.split(' ');
-
-            api.sendMessage("Args:" + "\n" + args, event.threadID);
-        }
-    },*/
-    //DONGER
-    {
+    }, {
         cmd: "donger",
         syntax: " [donger_id]",
         desc: "Donger",
         func: (api, event, args) => {
             var arguments = args.split(' ');
 
-            if (arguments[0] == "")
-            {
+            if (arguments[0] == "") {
                 var text = "";
 
-                for(var i = 0; i < lenny.length; i++)
+                for (var i = 0; i < lenny.length; i++)
                     text += i + ": " + lenny[i] + "\n";
 
                 api.sendMessage(text, event.threadID);
-            }
-            else
+            } else
                 api.sendMessage(lenny[arguments[0]], event.threadID);
         }
-    },
-    //KOLOR CZATU
-    {
+    }, {
         cmd: "color",
         syntax: " RRGGBB/RGB",
         desc: "Zmiana koloru czatu",
@@ -114,8 +94,7 @@ var commands = [
                 color = args[0] + args[0] + args[1] + args[1] + args[2] + args[2];
             } else if (color.length == 6) {
                 api.changeThreadColor(color, event.threadID, function callback(err) {
-                    if (err)
-                    {
+                    if (err) {
                         api.sendMessage("Wystąpił błąd. Sprawdź, czy kolor jest poprawnie zapisany w formacie RRGGBB lub RGB (szesnastkowo)!", event.threadID);
 
                         return console.error(err);
@@ -125,16 +104,13 @@ var commands = [
                 api.sendMessage("Wystąpił błąd. Sprawdź, czy kolor jest poprawnie zapisany w formacie RRGGBB lub RGB (szesnastkowo)!", event.threadID);
             }
         }
-    },
-    //EMOJI
-    {
+    }, {
         cmd: "emoji",
         syntax: " EMOJI",
         desc: "Zmiana emoji czatu",
         func: (api, event, args) => {
             api.changeThreadEmoji(args, event.threadID, function callback(err) {
-                if (err)
-                {
+                if (err) {
                     api.sendMessage(args + " nie jest prawidłowym emoji!", event.threadID);
 
                     return console.error(err);
@@ -143,16 +119,14 @@ var commands = [
 
             api.sendMessage("Ustawiłem emoji czatu na " + args, event.threadID);
         }
-    },
-    //ECHO
-    {
+    }, {
         cmd: "echo",
         syntax: " TEXT",
         desc: "Wyprowadzanie tekstu podanego jako argument",
         func: (api, event, args) => {
             var arguments = args.split('|');
 
-            for(var i = 0; i < arguments.length; i++)
+            for (var i = 0; i < arguments.length; i++)
                 api.sendMessage(arguments[i], event.threadID);
         }
     },
@@ -165,7 +139,7 @@ var commands = [
             api.sendMessage("Informacje o konwersacji:" + "\n" + JSON.stringify(event.getThreadInfo(event.threadID), null, 4), event.threadID);
         }
     }, */
-    //ID WATKU
+
     {
         cmd: "threadid",
         syntax: "",
@@ -173,18 +147,14 @@ var commands = [
         func: (api, event, args) => {
             api.sendMessage("ID konwersacji:" + "\n" + event.threadID, event.threadID);
         }
-    },
-    //ID USERA
-    {
+    }, {
         cmd: "senderid",
         syntax: "",
         desc: "Zwraca ID użytkownika",
         func: (api, event, args) => {
             api.sendMessage("ID użytkownika:" + "\n" + event.senderID, event.threadID);
         }
-    },
-    //SMILE
-    {
+    }, {
         cmd: "smile",
         syntax: "",
         desc: "Zwraca uśmieszek :)",
@@ -196,33 +166,29 @@ var commands = [
 
             api.sendMessage(msg, event.threadID);
         }
-    },
-    //BAN
-    {
+    }, {
         cmd: "ban",
         syntax: " [user_id]",
         desc: "Banowanie użytkownika",
         func: (api, event, args) => {
             if (args !== "")
                 api.getUserID(args, function(err, data) {
-                if (err)
-                    return callback(err);
-                idtoban = data[0].userID;
-                if (idtoban === "100011360075056") {
-                    api.removeUserFromGroup(event.senderID, event.threadID);
+                    if (err)
+                        return callback(err);
+                    idtoban = data[0].userID;
+                    if (idtoban === "100011360075056") {
+                        api.removeUserFromGroup(event.senderID, event.threadID);
 
-                } else {
-                    api.removeUserFromGroup(idtoban, event.threadID);
-                }
+                    } else {
+                        api.removeUserFromGroup(idtoban, event.threadID);
+                    }
 
-            });
+                });
             else
                 api.removeUserFromGroup(event.senderID, event.threadID);
         },
         hidden: true
-    },
-    //DAILYHENICZ
-    {
+    }, {
         cmd: "dailychenicz",
         syntax: "",
         desc: "You have encountered a rare henicz",
@@ -230,15 +196,13 @@ var commands = [
             var randomnumber = Math.floor(Math.random() * 4) + 1;
             var msg = {
                 body: "tylko nie fap za duzo",
-                attachment: fs.createReadStream(imagesroot +'/dailyhenicz/' + randomnumber + '.jpg')
+                attachment: fs.createReadStream(imagesroot + '/dailyhenicz/' + randomnumber + '.jpg')
             };
 
             api.sendMessage(msg, event.threadID);
         },
         hidden: true
-    },
-    //2137
-    {
+    }, {
         cmd: "2137",
         syntax: "",
         desc: "INSERT Kremówka;",
@@ -252,38 +216,33 @@ var commands = [
             api.sendMessage(msg, event.threadID);
         },
         hidden: true
-    },
-    //user search
-    {
+    }, {
         cmd: "search",
         syntax: "",
         desc: "Wyszukuje ID usera",
         func: (api, event, args) => {
             api.getUserID(args, function(err, data) {
-            if (err)
+                if (err)
                     return callback(err);
 
-            var foundID = data[0].userID;
-            api.sendMessage("Wynik wyszukiwania dla " + args + " : " + foundID, event.threadID);
-         });
+                var foundID = data[0].userID;
+                api.sendMessage("Wynik wyszukiwania dla " + args + " : " + foundID, event.threadID);
+            });
         },
         hidden: false
-    },
-    //INFOTBL
-    {
+    }, {
         cmd: "infotbl",
         syntax: "",
         desc: "Zwraca zawartość tabeli 'info'",
         func: (api, event, args) => {
-                    //var obj = connection.query("SELECT * FROM info");
+            //var obj = connection.query("SELECT * FROM info");
 
             //var cache = [];
             //var text = JSON.stringify(obj, function(key, value) { if (typeof value === 'object' && value !== null) { if (cache.indexOf(value) !== -1) { return; } cache.push(value); } return value; }); cache = null;
 
             //api.sendMessage(text, event.threadID);
         }
-    },
-    {
+    }, {
         cmd: "nick",
         syntax: " [nazwa]|[nick]",
         desc: " Zmienia nick użytkownika",
@@ -298,8 +257,7 @@ var commands = [
                 });
             });
         }
-    },
-    {
+    }, {
         cmd: "ai",
         syntax: " <on/off>",
         desc: " Włącza tryb czatbota AI",
@@ -309,7 +267,7 @@ var commands = [
                     aithreads.push(event.threadID);
                     api.sendMessage("Tryb AI włączony", event.threadID)
                 } else {
-                    api.sendMessage("Konwersacja znajduje się na czarnej liście",  event.threadID);
+                    api.sendMessage("Konwersacja znajduje się na czarnej liście", event.threadID);
                 }
             } else if (args === "off" && aithreads.indexOf(event.threadID) > -1) {
                 var aitindex = aithreads.indexOf(event.threadID);
@@ -321,8 +279,7 @@ var commands = [
                 api.sendMessage("Opcja jest już aktywna, lub podałeś zły argument.", event.threadID);
             }
         }
-    },
-    {
+    }, {
         cmd: "mal",
         syntax: "<user/search> <args>",
         desc: " Sprawdza MyAnimeList",
@@ -332,56 +289,56 @@ var commands = [
             var firstarg = malargs.shift();
             malargs = malargs.join(" ");
             if (firstarg === "user") {
-            https.get('https://myanimelist.net/malappinfo.php?u=' + malargs + '&status=all&type=anime', function(res) {
-                if (res.statusCode >= 200 && res.statusCode < 400) {
-                    res.on('data', function(data_) { data += data_.toString(); });
-                    res.on('end', function() {
-                        parseString(data, function(err, result) {
-                            var userinfo = result.myanimelist.myinfo;
-                            console.log(malargs[1]);
-                            if (!userinfo) { api.sendMessage("Niepoprawny nick, lub wystąpił błąd", event.threadID); } else {
-                            api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n" + "Obejrzane anime: " + userinfo[0].user_completed + "\n" + "Oglądane anime: " + userinfo[0].user_watching + "\n" + "Wstrzymane anime: " + userinfo[0].user_onhold + "\n" + "Porzucone anime: " + userinfo[0].user_dropped + "\n" + "Planowane anime:: " + userinfo[0].user_plantowatch + "\n" + "Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);}
+                https.get('https://myanimelist.net/malappinfo.php?u=' + malargs + '&status=all&type=anime', function(res) {
+                    if (res.statusCode >= 200 && res.statusCode < 400) {
+                        res.on('data', function(data_) { data += data_.toString(); });
+                        res.on('end', function() {
+                            parseString(data, function(err, result) {
+                                var userinfo = result.myanimelist.myinfo;
+                                console.log(malargs[1]);
+                                if (!userinfo) { api.sendMessage("Niepoprawny nick, lub wystąpił błąd", event.threadID); } else {
+                                    api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n" + "Obejrzane anime: " + userinfo[0].user_completed + "\n" + "Oglądane anime: " + userinfo[0].user_watching + "\n" + "Wstrzymane anime: " + userinfo[0].user_onhold + "\n" + "Porzucone anime: " + userinfo[0].user_dropped + "\n" + "Planowane anime:: " + userinfo[0].user_plantowatch + "\n" + "Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);
+                                }
+                            });
                         });
-                    });
-                }
-            });
+                    }
+                });
             } else if (firstarg === "search") {
-                process.on('uncaughtException', function (err) {
+                process.on('uncaughtException', function(err) {
                     console.log('Caught exception: ' + err);
                 });
 
                 api.sendMessage("Wyszukuję anime o tytule: " + malargs);
                 try {
-                client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
-                // parsed response body as js object
-                console.log(data.toString());
+                    client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function(data, response) {
+                        // parsed response body as js object
+                        console.log(data.toString());
 
-                var queryanimes = [];
-                data.anime.entry.forEach(function (elem) {
-                    queryanimes.push(elem);
-                });
+                        var queryanimes = [];
+                        data.anime.entry.forEach(function(elem) {
+                            queryanimes.push(elem);
+                        });
 
-                var msg = {
-                    body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id //pamietaj o przecinku cwelu ~ja
-                    //attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
+                        var msg = {
+                            body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id //pamietaj o przecinku cwelu ~ja
+                                //attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
+                        }
+
+
+
+                        //api.sendMessage("Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id, event.threadID);
+                        // raw response
+                        //console.log(response);
+
+                    });
+                } catch (e) {
+                    return console.log(e);
+                    return api.sendMessage("Nie znaleziono wyników.", event.threadID);
                 }
-                
 
-
-                //api.sendMessage("Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id, event.threadID);
-                // raw response
-                //console.log(response);
-
-            });
-            } catch (e) {
-                return console.log(e);
-                return api.sendMessage("Nie znaleziono wyników.", event.threadID);
             }
-
         }
-    }
-    },
-    {
+    }, {
         cmd: "history",
         syntax: "<start> <end>",
         desc: "Sprawdza historie czatu",
@@ -393,20 +350,19 @@ var commands = [
                 console.log(err);
             });
         }
-    },
-    {
+    }, {
         cmd: "yt",
         desc: "Wyszukuje film na youtube",
         syntax: " <tekst>",
         func: (api, event, args) => {
             url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + args[0] + "&safeSearch=none&key=" + process.env.YT_KEY;
-            request(url, (error, response, body)=> {
+            request(url, (error, response, body) => {
                 if (!error && response.statusCode === 200) {
-                const ytresponse = JSON.parse(body)
-                api.sendMessage("http://youtu.be/" + ytresponse.items[0].id.videoId, event.threadID);
-                console.log(ytresponse);
-            } else {
-                console.log("Got an error: ", error, ", status code: ", response.statusCode)
+                    const ytresponse = JSON.parse(body)
+                    api.sendMessage("http://youtu.be/" + ytresponse.items[0].id.videoId, event.threadID);
+                    console.log(ytresponse);
+                } else {
+                    console.log("Got an error: ", error, ", status code: ", response.statusCode)
                 }
             });
         }
@@ -433,7 +389,7 @@ var ownerid = process.env.FB_OWNERID
 login({
     email: process.env.FB_USERNAME,
     password: process.env.FB_PASSWORD
-}, function callback (err, api) {
+}, function callback(err, api) {
     if (err)
         return console.error(err);
     api.setOptions({
@@ -447,7 +403,7 @@ login({
         if (err)
             return console.error(err);
 
-        switch(event.type) {
+        switch (event.type) {
             case "message":
                 if (typeof(event.body) == "string") {
                     var input = event.body.toLowerCase();
@@ -456,21 +412,16 @@ login({
                     if (input == "cmdchar")
                         commands[1].func(api, event, "");
 
-                    if (input[0] == useChar)
-                    {
+                    if (input[0] == useChar) {
                         var cmd = split[0].substring(1);
                         var args = event.body.slice(split[0].length + 1);
 
-                        for(var i = 0; i < commands.length; i++)
-                        {
-                            if (cmd == commands[i].cmd)
-                            {
-                                if (typeof(commands[i].func) == "function")
-                                {
+                        for (var i = 0; i < commands.length; i++) {
+                            if (cmd == commands[i].cmd) {
+                                if (typeof(commands[i].func) == "function") {
                                     console.log("Executed: '" + cmd + "'");
                                     commands[i].func(api, event, args);
-                                }
-                                else
+                                } else
                                     api.sendMessage(JSON.stringify(commands[i]), event.threadID);
                             }
                         }
@@ -492,11 +443,10 @@ login({
                     if (err)
                         console.log(err);
                 });
-            break;
+                break;
             case "event":
                 console.log(event.logMessageType);
-            break;
+                break;
         }
     });
 });
-
