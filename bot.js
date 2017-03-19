@@ -231,18 +231,6 @@ var commands = [
         },
         hidden: false
     }, {
-        cmd: "infotbl",
-        syntax: "",
-        desc: "Zwraca zawartość tabeli 'info'",
-        func: (api, event, args) => {
-            //var obj = connection.query("SELECT * FROM info");
-
-            //var cache = [];
-            //var text = JSON.stringify(obj, function(key, value) { if (typeof value === 'object' && value !== null) { if (cache.indexOf(value) !== -1) { return; } cache.push(value); } return value; }); cache = null;
-
-            //api.sendMessage(text, event.threadID);
-        }
-    }, {
         cmd: "nick",
         syntax: " [nazwa]|[nick]",
         desc: " Zmienia nick użytkownika",
@@ -419,7 +407,7 @@ login({
                         for (var i = 0; i < commands.length; i++) {
                             if (cmd == commands[i].cmd) {
                                 if (typeof(commands[i].func) == "function") {
-                                    console.log("Executed: '" + cmd + "'");
+                                    console.log("Executed: '" + cmd + "' with arguments '" + args + "' on " + event.threadID);
                                     commands[i].func(api, event, args);
                                 } else
                                     api.sendMessage(JSON.stringify(commands[i]), event.threadID);
