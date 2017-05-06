@@ -22,6 +22,7 @@ const request = require('request');
 cleverbot.configure({ botapi: process.env.CLEVERBOT_API });
 var banned = [""]
 var imagesroot = process.env.IMG_ROOT; // BEZ SLASHA NA KONCU!
+if (imagesroot) { } else { imagesroot = "."; }
 var commands = [
 
     {
