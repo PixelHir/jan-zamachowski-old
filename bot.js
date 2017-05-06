@@ -5,6 +5,7 @@ const parseString = require('xml2js').parseString;
 const util = require('util');
 const eyes = require('eyes');
 const https = require('https');
+const sleep = require('sleep');
 var useChar = "@";
 var lenny = [
     "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
@@ -378,8 +379,11 @@ login({
     email: process.env.FB_USERNAME,
     password: process.env.FB_PASSWORD
 }, function callback(err, api) {
-    if (err)
+    if (err) {
         return console.error(err);
+	console.log("Restarting in 15 seconds");
+	sleep.sleep(15);
+    }
     api.setOptions({
         listenEvents: true,
         logLevel: "silent",
