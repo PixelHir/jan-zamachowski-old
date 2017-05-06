@@ -24,7 +24,6 @@ var banned = [""]
 var imagesroot = process.env.IMG_ROOT; // BEZ SLASHA NA KONCU!
 if (imagesroot) { } else { imagesroot = "."; }
 var commands = [
-a
     {
         cmd: "help",
         syntax: " --short/long",
