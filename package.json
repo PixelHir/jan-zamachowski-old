@@ -10,6 +10,7 @@
     "cleverbot-node": "0.3.5",
     "eyes": "^0.1.8",
     "facebook-chat-api": "^1.2.0",
+    "forever": "^0.15.3",
     "https": "^1.0.0",
     "mysql": "2.13.0",
     "node-rest-client": "^2.5.0",
