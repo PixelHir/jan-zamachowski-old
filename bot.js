@@ -6,6 +6,7 @@ const util = require('util');
 const eyes = require('eyes');
 const https = require('https');
 const sleep = require('sleep');
+var config = require('./config.js');
 var useChar = "@";
 var lenny = [
     "( ͡° ͜ʖ ͡°)", '¯\\_(ツ)_/¯', "( ͡° ʖ̯ ͡°)", "( ͡°╭͜ʖ╮͡° )", "(ง ͠° ͟ل͜ ͡°)ง", "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]", "(° ͡ ͜ ͡ʖ ͡ °)", "( ͡°╭ʖ╮ °͡)"
@@ -17,10 +18,10 @@ var adminlist = ["100001862348398", "100013249186366", "100001331385570"];
 const Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
 const Client = require('node-rest-client').Client;
-var options_auth = { user: process.env.MAL_USERNAME, password: process.env.MAL_PASSWORD };
+var options_auth = { user: config.MAL_USERNAME, password: config.MAL_PASSWORD };
 var client = new Client(options_auth);
 const request = require('request');
-cleverbot.configure({ botapi: process.env.CLEVERBOT_API });
+cleverbot.configure({ botapi: config.CLEVERBOT_API });
 var banned = [""]
 var imagesroot = process.env.IMG_ROOT; // BEZ SLASHA NA KONCU!
 if (imagesroot) { } else { imagesroot = "."; }
@@ -379,8 +380,8 @@ connection.query("USE `janek`;");
 */
 var ownerid = process.env.FB_OWNERID
 login({
-    email: process.env.FB_USERNAME,
-    password: process.env.FB_PASSWORD
+    email: config.FB_USERNAME,
+    password: config.FB_PASSWORD
 }, function callback(err, api) {
     if (err) {
         return console.error(err);
