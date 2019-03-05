@@ -5,7 +5,6 @@ const parseString = require('xml2js').parseString;
 const util = require('util');
 const eyes = require('eyes');
 const https = require('https');
-const sleep = require('sleep');
 var config = require('./config.js');
 var useChar = "@";
 var lenny = [
@@ -341,22 +340,6 @@ var commands = [
                 api.sendMessage(hist, event.threadID);
                 console.log(hist);
                 console.log(err);
-            });
-        }
-    }, {
-        cmd: "yt",
-        desc: "Wyszukuje film na youtube",
-        syntax: " <tekst>",
-        func: (api, event, args) => {
-            url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + args[0] + "&safeSearch=none&key=" + process.env.YT_KEY;
-            request(url, (error, response, body) => {
-                if (!error && response.statusCode === 200) {
-                    const ytresponse = JSON.parse(body)
-                    api.sendMessage("http://youtu.be/" + ytresponse.items[0].id.videoId, event.threadID);
-                    console.log(ytresponse);
-                } else {
-                    console.log("Got an error: ", error, ", status code: ", response.statusCode)
-                }
             });
         }
     }
