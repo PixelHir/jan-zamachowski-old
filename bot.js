@@ -17,13 +17,16 @@ var adminlist = ["100001862348398", "100013249186366", "100001331385570"];
 const Cleverbot = require('cleverbot-node');
 cleverbot = new Cleverbot;
 const Client = require('node-rest-client').Client;
-var options_auth = { user: config.MAL_USERNAME, password: config.MAL_PASSWORD };
+var options_auth = {user: config.MAL_USERNAME, password: config.MAL_PASSWORD};
 var client = new Client(options_auth);
 const request = require('request');
-cleverbot.configure({ botapi: config.CLEVERBOT_API });
+cleverbot.configure({botapi: config.CLEVERBOT_API});
 var banned = [""]
 var imagesroot = process.env.IMG_ROOT; // BEZ SLASHA NA KONCU!
-if (imagesroot) { } else { imagesroot = "."; }
+if (imagesroot) {
+} else {
+    imagesroot = ".";
+}
 var commands = [
     {
         cmd: "help",
@@ -89,25 +92,27 @@ var commands = [
         syntax: " color name/list",
         desc: "Zmiana koloru czatu",
         func: (api, event, args) => {
-            if(args == "list") {
-		console.log(api.threadColors);
-		console.log(args);
-		colorlist = "Dostępne kolory: "
-		for(var key in api.threadColors) {
-			colorlist += '\n' + key;
-			console.log(api.threadColors[key]);
-	    	}
-		api.sendMessage(colorlist, event.threadID);
-	} else {
-		for(var key in api.threadColors) {
-			if(args == key) {
-				api.changeThreadColor(api.threadColors[key], event.threadID, (err) => {
-					if (err) { console.log(err); }
-				});
-			}
-		}
-	}
-}
+            if (args == "list") {
+                console.log(api.threadColors);
+                console.log(args);
+                colorlist = "Dostępne kolory: "
+                for (var key in api.threadColors) {
+                    colorlist += '\n' + key;
+                    console.log(api.threadColors[key]);
+                }
+                api.sendMessage(colorlist, event.threadID);
+            } else {
+                for (var key in api.threadColors) {
+                    if (args == key) {
+                        api.changeThreadColor(api.threadColors[key], event.threadID, (err) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                }
+            }
+        }
     }, {
         cmd: "emoji",
         syntax: " EMOJI",
@@ -176,7 +181,7 @@ var commands = [
         desc: "Banowanie użytkownika",
         func: (api, event, args) => {
             if (args !== "")
-                api.getUserID(args, function(err, data) {
+                api.getUserID(args, function (err, data) {
                     if (err)
                         return callback(err);
                     idtoban = data[0].userID;
@@ -211,13 +216,14 @@ var commands = [
         syntax: "",
         desc: "INSERT Kremówka;",
         func: (api, event, args) => {
-            var randomnumber = Math.floor(Math.random() * 5) + 1;
-            var msg = {
-                body: "Inba trwa",
-                attachment: fs.createReadStream(imagesroot + '/inba/' + randomnumber + '.png')
-            };
-            console.log(imagesroot + '/inba');
-            api.sendMessage(msg, event.threadID);
+            fs.readdir('./inba', (err, cenzo) => {
+                var chosencenzo = cenzo[Math.floor(Math.random() * cenzo.length)]
+                var msg = {
+                    body: "Inba trwa",
+                    attachment: fs.createReadStream(imagesroot + '/inba/' + chosencenzo)
+                };
+                api.sendMessage(msg, event.threadID);
+            });
         },
         hidden: true
     }, {
@@ -225,7 +231,7 @@ var commands = [
         syntax: "",
         desc: "Wyszukuje ID usera",
         func: (api, event, args) => {
-            api.getUserID(args, function(err, data) {
+            api.getUserID(args, function (err, data) {
                 if (err)
                     return callback(err);
 
@@ -240,7 +246,7 @@ var commands = [
         desc: " Zmienia nick użytkownika",
         func: (api, event, args) => {
             nickargs = args.split("|", 2);
-            api.getUserID(nickargs[0], function(err, data) {
+            api.getUserID(nickargs[0], function (err, data) {
                 if (err)
                     return callback(err);
                 idtochange = data[0].userID;
@@ -281,14 +287,18 @@ var commands = [
             var firstarg = malargs.shift();
             malargs = malargs.join(" ");
             if (firstarg === "user") {
-                https.get('https://myanimelist.net/malappinfo.php?u=' + malargs + '&status=all&type=anime', function(res) {
+                https.get('https://myanimelist.net/malappinfo.php?u=' + malargs + '&status=all&type=anime', function (res) {
                     if (res.statusCode >= 200 && res.statusCode < 400) {
-                        res.on('data', function(data_) { data += data_.toString(); });
-                        res.on('end', function() {
-                            parseString(data, function(err, result) {
+                        res.on('data', function (data_) {
+                            data += data_.toString();
+                        });
+                        res.on('end', function () {
+                            parseString(data, function (err, result) {
                                 var userinfo = result.myanimelist.myinfo;
                                 console.log(malargs[1]);
-                                if (!userinfo) { api.sendMessage("Niepoprawny nick, lub wystąpił błąd", event.threadID); } else {
+                                if (!userinfo) {
+                                    api.sendMessage("Niepoprawny nick, lub wystąpił błąd", event.threadID);
+                                } else {
                                     api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n" + "Obejrzane anime: " + userinfo[0].user_completed + "\n" + "Oglądane anime: " + userinfo[0].user_watching + "\n" + "Wstrzymane anime: " + userinfo[0].user_onhold + "\n" + "Porzucone anime: " + userinfo[0].user_dropped + "\n" + "Planowane anime:: " + userinfo[0].user_plantowatch + "\n" + "Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);
                                 }
                             });
@@ -296,26 +306,25 @@ var commands = [
                     }
                 });
             } else if (firstarg === "search") {
-                process.on('uncaughtException', function(err) {
+                process.on('uncaughtException', function (err) {
                     console.log('Caught exception: ' + err);
                 });
 
                 api.sendMessage("Wyszukuję anime o tytule: " + malargs);
                 try {
-                    client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function(data, response) {
+                    client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
                         // parsed response body as js object
                         console.log(data.toString());
 
                         var queryanimes = [];
-                        data.anime.entry.forEach(function(elem) {
+                        data.anime.entry.forEach(function (elem) {
                             queryanimes.push(elem);
                         });
 
                         var msg = {
                             body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id //pamietaj o przecinku cwelu ~ja
-                                //attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
+                            //attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
                         }
-
 
 
                         //api.sendMessage("Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id, event.threadID);
@@ -368,24 +377,22 @@ login({
 }, function callback(err, api) {
     if (err) {
         return console.error(err);
-	console.log("Restarting in 15 seconds");
-	sleep.sleep(15);
     }
     api.setOptions({
         listenEvents: true,
         logLevel: "silent",
         forceLogin: true
     });
-    api.setOptions({ listenEvents: true });
+    api.setOptions({listenEvents: true});
     api.sendMessage("Bot został zrestartowany pomyślnie.", "100001862348398");
     api.sendMessage("Bot został zrestartowany pomyślnie.", "100013249186366");
-    var stopListening = api.listen(function(err, event) {
+    var stopListening = api.listen(function (err, event) {
         if (err)
             return console.error(err);
 
         switch (event.type) {
             case "message":
-                if (typeof(event.body) == "string") {
+                if (typeof (event.body) == "string") {
                     var input = event.body.toLowerCase();
                     var split = input.split(' ');
 
@@ -398,7 +405,7 @@ login({
 
                         for (var i = 0; i < commands.length; i++) {
                             if (cmd == commands[i].cmd) {
-                                if (typeof(commands[i].func) == "function") {
+                                if (typeof (commands[i].func) == "function") {
                                     console.log("Executed: '" + cmd + "' with arguments '" + args + "' on " + event.threadID);
                                     commands[i].func(api, event, args);
                                 } else
@@ -419,7 +426,7 @@ login({
 
                 }
 
-                api.markAsRead(event.threadID, function(err) {
+                api.markAsRead(event.threadID, function (err) {
                     if (err)
                         console.log(err);
                 });
