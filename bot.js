@@ -278,68 +278,6 @@ var commands = [
             }
         }
     }, {
-        cmd: "mal",
-        syntax: "<user/search> <args>",
-        desc: " Sprawdza MyAnimeList",
-        func: (api, event, args) => {
-            var malargs = args.split(" ");
-            var data = '';
-            var firstarg = malargs.shift();
-            malargs = malargs.join(" ");
-            if (firstarg === "user") {
-                https.get('https://myanimelist.net/malappinfo.php?u=' + malargs + '&status=all&type=anime', function (res) {
-                    if (res.statusCode >= 200 && res.statusCode < 400) {
-                        res.on('data', function (data_) {
-                            data += data_.toString();
-                        });
-                        res.on('end', function () {
-                            parseString(data, function (err, result) {
-                                var userinfo = result.myanimelist.myinfo;
-                                console.log(malargs[1]);
-                                if (!userinfo) {
-                                    api.sendMessage("Niepoprawny nick, lub wystąpił błąd", event.threadID);
-                                } else {
-                                    api.sendMessage("Statystyki dla użytkownika: " + userinfo[0].user_name + "\n" + "Obejrzane anime: " + userinfo[0].user_completed + "\n" + "Oglądane anime: " + userinfo[0].user_watching + "\n" + "Wstrzymane anime: " + userinfo[0].user_onhold + "\n" + "Porzucone anime: " + userinfo[0].user_dropped + "\n" + "Planowane anime:: " + userinfo[0].user_plantowatch + "\n" + "Dni spędzone na oglądanie: " + userinfo[0].user_days_spent_watching, event.threadID);
-                                }
-                            });
-                        });
-                    }
-                });
-            } else if (firstarg === "search") {
-                process.on('uncaughtException', function (err) {
-                    console.log('Caught exception: ' + err);
-                });
-
-                api.sendMessage("Wyszukuję anime o tytule: " + malargs);
-                try {
-                    client.get("https://myanimelist.net/api/anime/search.xml?q=" + malargs, function (data, response) {
-                        // parsed response body as js object
-                        console.log(data.toString());
-
-                        var queryanimes = [];
-                        data.anime.entry.forEach(function (elem) {
-                            queryanimes.push(elem);
-                        });
-
-                        var msg = {
-                            body: "Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id //pamietaj o przecinku cwelu ~ja
-                            //attachment: request(queryanimes[0].image).pipe(fs.createWriteStream('animeimg.jpg'))
-                        }
-
-
-                        //api.sendMessage("Tytuł: " + queryanimes[0].title + "\n" + "Znane także jako " + queryanimes[0].english + " po angielsku." + "\n" + "Ilość odcinków: " + queryanimes[0].episodes + "\n" + "Rodzaj: " + queryanimes[0].type + "\n" + "http://myanimelist.net/anime/" + queryanimes[0].id, event.threadID);
-                        // raw response
-                        //console.log(response);
-
-                    });
-                } catch (e) {
-                    return console.log(e);
-                    return api.sendMessage("Nie znaleziono wyników.", event.threadID);
-                }
-
-            }
-        }
-    }, {
         cmd: "history",
         syntax: "<start> <end>",
         desc: "Sprawdza historie czatu",
@@ -350,8 +288,8 @@ var commands = [
                 console.log(hist);
                 console.log(err);
             });
+            }
         }
-    }
 ];
 
 /*
@@ -370,7 +308,6 @@ connection.connect(function(err) {
 console.log('Connected to DB');
 connection.query("USE `janek`;");
 */
-var ownerid = process.env.FB_OWNERID
 login({
     email: config.FB_USERNAME,
     password: config.FB_PASSWORD
