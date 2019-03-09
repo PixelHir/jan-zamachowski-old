@@ -7,16 +7,6 @@ const https = require("https");
 const mysql = require("mysql");
 var config = require("./config.js");
 var useChar = "@";
-var lenny = [
-	"( ͡° ͜ʖ ͡°)",
-	"¯\\_(ツ)_/¯",
-	"( ͡° ʖ̯ ͡°)",
-	"( ͡°╭͜ʖ╮͡° )",
-	"(ง ͠° ͟ل͜ ͡°)ง",
-	"[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]",
-	"(° ͡ ͜ ͡ʖ ͡ °)",
-	"( ͡°╭ʖ╮ °͡)"
-];
 var aithreads = [];
 var aiblacklist = ["1149148498474456"];
 //const commands = require('./commands/commands.js');
@@ -39,7 +29,7 @@ var commands = [
 		func: (api, event, args) => {
 			var argms = args.split(" ");
 			var text = "";
-
+	
 			if (argms[0] == "--long") {
 				for (var i = 0; i < commands.length; i++) {
 					if (!commands[i].hidden) {
@@ -90,84 +80,6 @@ var commands = [
 			}
 		}
 	},
-	{
-		cmd: "donger",
-		syntax: " [donger_id]",
-		desc: "Donger",
-		func: (api, event, args) => {
-			var argms = args.split(" ");
-
-			if (argms[0] == "") {
-				var text = "";
-
-				for (var i = 0; i < lenny.length; i++)
-					text += i + ": " + lenny[i] + "\n";
-
-				api.sendMessage(text, event.threadID);
-			} else api.sendMessage(lenny[argms[0]], event.threadID);
-		}
-	},
-	{
-		cmd: "color",
-		syntax: " color name/list",
-		desc: "Zmiana koloru czatu",
-		func: (api, event, args) => {
-			if (args == "list") {
-				console.log(api.threadColors);
-				console.log(args);
-				colorlist = "Dostępne kolory: ";
-				for (var key in api.threadColors) {
-					colorlist += "\n" + key;
-					console.log(api.threadColors[key]);
-				}
-				api.sendMessage(colorlist, event.threadID);
-			} else {
-				for (var key in api.threadColors) {
-					if (args == key) {
-						api.changeThreadColor(
-							api.threadColors[key],
-							event.threadID,
-							err => {
-								if (err) {
-									console.log(err);
-								}
-							}
-						);
-					}
-				}
-			}
-		}
-	},
-	{
-		cmd: "emoji",
-		syntax: " EMOJI",
-		desc: "Zmiana emoji czatu",
-		func: (api, event, args) => {
-			api.changeThreadEmoji(args, event.threadID, function callback(err) {
-				if (err) {
-					api.sendMessage(
-						args + " nie jest prawidłowym emoji!",
-						event.threadID
-					);
-
-					return console.error(err);
-				}
-			});
-
-			api.sendMessage("Ustawiłem emoji czatu na " + args, event.threadID);
-		}
-	},
-	{
-		cmd: "echo",
-		syntax: " TEXT",
-		desc: "Wyprowadzanie tekstu podanego jako argument",
-		func: (api, event, args) => {
-			var argms = args.split("|");
-
-			for (var i = 0; i < argms.length; i++)
-				api.sendMessage(argms[i], event.threadID);
-		}
-	},
 	/*INFORMACJE O WATKU - broken
     {
         cmd: "threadinfo",
@@ -177,131 +89,6 @@ var commands = [
             api.sendMessage("Informacje o konwersacji:" + "\n" + JSON.stringify(event.getThreadInfo(event.threadID), null, 4), event.threadID);
         }
     }, */
-
-	{
-		cmd: "threadid",
-		syntax: "",
-		desc: "Zwraca ID wątku",
-		func: (api, event, args) => {
-			api.sendMessage(
-				"ID konwersacji:" + "\n" + event.threadID,
-				event.threadID
-			);
-		}
-	},
-	{
-		cmd: "senderid",
-		syntax: "",
-		desc: "Zwraca ID użytkownika",
-		func: (api, event, args) => {
-			api.sendMessage(
-				"ID użytkownika:" + "\n" + event.senderID,
-				event.threadID
-			);
-		}
-	},
-	{
-		cmd: "smile",
-		syntax: "",
-		desc: "Zwraca uśmieszek :)",
-		func: (api, event, args) => {
-			var msg = {
-				body: ":)",
-				attachment: fs.createReadStream("./img/smile.jpg")
-			};
-
-			api.sendMessage(msg, event.threadID);
-		}
-	},
-	{
-		cmd: "ban",
-		syntax: " [user_id]",
-		desc: "Banowanie użytkownika",
-		func: (api, event, args) => {
-			if (args !== "")
-				api.getUserID(args, function(err, data) {
-					if (err) return callback(err);
-					idtoban = data[0].userID;
-					if (idtoban === "100011360075056") {
-						api.removeUserFromGroup(event.senderID, event.threadID);
-					} else {
-						api.removeUserFromGroup(idtoban, event.threadID);
-					}
-				});
-			else api.removeUserFromGroup(event.senderID, event.threadID);
-		},
-		hidden: true
-	},
-	{
-		cmd: "dailychenicz",
-		syntax: "",
-		desc: "You have encountered a rare henicz",
-		func: (api, event, args) => {
-			var randomnumber = Math.floor(Math.random() * 4) + 1;
-			var msg = {
-				body: "tylko nie fap za duzo",
-				attachment: fs.createReadStream(
-					imagesroot + "/dailyhenicz/" + randomnumber + ".jpg"
-				)
-			};
-
-			api.sendMessage(msg, event.threadID);
-		},
-		hidden: true
-	},
-	{
-		cmd: "2137",
-		syntax: "",
-		desc: "INSERT Kremówka;",
-		func: (api, event, args) => {
-			fs.readdir("./inba", (err, cenzo) => {
-				var chosencenzo = cenzo[Math.floor(Math.random() * cenzo.length)];
-				var msg = {
-					body: "Inba trwa",
-					attachment: fs.createReadStream(imagesroot + "/inba/" + chosencenzo)
-				};
-				api.sendMessage(msg, event.threadID);
-			});
-		},
-		hidden: true
-	},
-	{
-		cmd: "search",
-		syntax: "",
-		desc: "Wyszukuje ID usera",
-		func: (api, event, args) => {
-			api.getUserID(args, function(err, data) {
-				if (err) return callback(err);
-
-				var foundID = data[0].userID;
-				api.sendMessage(
-					"Wynik wyszukiwania dla " + args + " : " + foundID,
-					event.threadID
-				);
-			});
-		},
-		hidden: false
-	},
-	{
-		cmd: "nick",
-		syntax: " [nazwa]|[nick]",
-		desc: " Zmienia nick użytkownika",
-		func: (api, event, args) => {
-			nickargs = args.split("|", 2);
-			api.getUserID(nickargs[0], function(err, data) {
-				if (err) return callback(err);
-				idtochange = data[0].userID;
-				api.changeNickname(
-					nickargs[1],
-					event.threadID,
-					idtochange,
-					function callback(err) {
-						if (err) return console.error(err);
-					}
-				);
-			});
-		}
-	},
 	{
 		cmd: "ai",
 		syntax: " <on/off>",
@@ -360,36 +147,17 @@ var commands = [
 				);
 			}
 		}
-	},
-	{
-		cmd: "history",
-		syntax: "<start> <end>",
-		desc: "Sprawdza historie czatu",
-		func: (api, event, args) => {
-			api.getThreadHistory(event.threadID, args[0], args[1], 0, (err, hist) => {
-				api.sendMessage(hist, event.threadID);
-				console.log(hist);
-				console.log(err);
-			});
-		}
-	},
-	{
-		cmd: "debug",
-		syntax: "",
-		desc: "",
-		func: (api, event, args) => {
-			/*con.query('SELECT * FROM threads;', (err, res) => {
-            if(err) {
-                console.log(err);
-            }
-            console.log(res);
-        });*/
-			threadinitdb(event.threadID, api, () => {
-				console.log("done");
-			});
-		}
 	}
 ];
+
+fs.readdir('./commands/', (err, files) => {
+	files.forEach((file) => {
+		if(file.endsWith('.js')) {
+			commands.push(require('./commands/' + file));
+		}
+	})
+});
+
 
 /*
 var connection = mysql.createConnection({
@@ -438,7 +206,7 @@ login(
 							var input = event.body.toLowerCase();
 							var split = input.split(" ");
 
-							if (input == "cmdchar") commands[1].func(api, event, "");
+							//if (input == "cmdchar") commands[1].func(api, event, "");
 
 							if (input[0] == useChar) {
 								var cmd = split[0].substring(1);
