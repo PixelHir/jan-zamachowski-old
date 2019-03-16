@@ -177,8 +177,7 @@ connection.query("USE `janek`;");
 */
 login(
 	{
-		email: config.FB_USERNAME,
-		password: config.FB_PASSWORD
+		appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))
 	},
 	function callback(err, api) {
 		if (err) {
