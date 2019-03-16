@@ -8,7 +8,7 @@ module.exports = {
         var msg = {
             body: "heniooo",
             attachment: fs.createReadStream(
-                imagesroot + "/dailyhenicz/" + randomnumber + ".jpg"
+                "./dailyhenicz/" + randomnumber + ".jpg"
             )
         };
 
